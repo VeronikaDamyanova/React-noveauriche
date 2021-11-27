@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const isAuthenticated = require('./authMiddleware');
 
-var serviceAccount = require("../react-noveauriche-firebase-adminsdk-q7ldk-faa0a14c35.json");
+var serviceAccount = require("../react-project-28407-firebase-adminsdk-7y7dd-6966d19b96.json");
 
 const app = express();
 

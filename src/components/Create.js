@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment, useContext } from 'react';
 import { collection, getDocs, } from "firebase/firestore"; 
-import { db } from '../firebase';
+import { db } from '../utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
 
 const Blog = ({ }) => {

@@ -1,22 +1,22 @@
-import { initializeApp } from "firebase/app";
+import {  initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from "firebase/firestore";
 
-// import firebase from 'firebase/compat/app';
-// import 'firebase/auth';
+// import 'firebase/database';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBPH96N8Tqkyb6A4hAdrS83jOFJyU_oADk",
-  authDomain: "react-noveauriche.firebaseapp.com",
-  projectId: "react-noveauriche",
-  storageBucket: "react-noveauriche.appspot.com",
-  messagingSenderId: "21194413060",
-  appId: "1:21194413060:web:bcc4c1f182fbdecdd71151"
+  apiKey: "AIzaSyADhLXNKQHCkFjnvCbgI-rFtswVFGWJb8Y",
+  authDomain: "react-project-28407.firebaseapp.com",
+  projectId: "react-project-28407",
+  storageBucket: "react-project-28407.appspot.com",
+  messagingSenderId: "736205818410",
+  appId: "1:736205818410:web:814f23e35722ca9dd79153"
 };
 
 const app = initializeApp(firebaseConfig);
+// const db = app.getFirestoreApp();
+export const auth = getAuth(app)
+export const db = getFirestore();
 
-// export default !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-
-
-// export default firebase;
-
-// const app = initializeApp(firebaseConfig);
+  // const fireDb = firebase.initializeApp(firebaseConfig);
+  // export default fireDb.database().ref();
