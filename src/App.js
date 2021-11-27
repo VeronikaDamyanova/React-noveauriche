@@ -13,6 +13,7 @@ import SinglePost from './pages/SinglePost';
 import Header from './components/Header';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
+import Blog from './components/Blog';
 import { useEffect, useState } from 'react';
 import AuthContext from './contexts/AuthContext';
 import isAuth from './hoc/isAuth';
@@ -47,13 +48,14 @@ function App() {
           <Route path="/update/:id" component={AddEdit} />
           <Route path="/view/:id" component={View} />
           <Route path="/about" component={About} />
+          <Route path="/blog" component={Blog} />
 
           <Route path="/single-post" component={SinglePost} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/logout" render={() => {
               auth.signOut();
-              return <Redirect to="/" />
+              return <Redirect to="/login" />
             }} />
           {/* <Route path="/logout" onClick={logout} /> */}
 

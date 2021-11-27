@@ -1,5 +1,6 @@
 
-import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore"; 
+import { getAuth, createUserWithEmailAndPassword, signOut  } from "firebase/auth";
 export const auth = getAuth();
 
 const Register = ({
@@ -10,13 +11,19 @@ const Register = ({
 
         const email = e.target.email.value;
         const password = e.target.password.value;
-
+          
         createUserWithEmailAndPassword(auth, email, password)
             .then(userCredential => {
+                // addDoc(collection(db, "users")
                 console.log('Register');
-                history.push('/');
+
+                signOut(auth)
+                history.push('/login');
+        
             });
     }
+
+ 
     
     return (
         <div className="login-register-page">

@@ -6,7 +6,9 @@ import { BrowserRouter as Router, Routes, Route, Link, NavLink, useParams, Brows
 import { auth } from '../firebase.js'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 
-function ListItems() {
+function ListItems({
+  history
+}) {
  
   const logout = async () => {
     await signOut(auth);
@@ -18,10 +20,10 @@ function ListItems() {
         <ul className="list-items">
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/about">About</NavLink></li>
-        <li><NavLink to="/fashion">Blogs</NavLink></li>
+        <li><NavLink to="/blog">Blog</NavLink></li>
         <li><NavLink to="/designers">Designers</NavLink></li>
         <li><NavLink to="/profile">Profile</NavLink></li>
-        <li><NavLink to="/" onClick={logout}>Logout</NavLink></li>
+        <li><NavLink to="/login" onClick={logout}>Logout</NavLink></li>
 
       </ul>
 
