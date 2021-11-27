@@ -19,6 +19,7 @@ import AuthContext from './contexts/AuthContext';
 import isAuth from './hoc/isAuth';
 
 import { getAuth } from "firebase/auth";
+import Create from './components/Create';
 export const auth = getAuth();
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Route path="/view/:id" component={View} />
           <Route path="/about" component={About} />
           <Route path="/blog" component={Blog} />
+          <Route path="/create" component={Create} />
 
           <Route path="/single-post" component={SinglePost} />
           <Route path="/register" component={Register} />

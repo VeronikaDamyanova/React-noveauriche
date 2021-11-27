@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment, useContext } from 'react';
 import { collection, getDocs, } from "firebase/firestore"; 
 import { db } from '../utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
+import { NavLink } from 'react-router-dom';
 
 const Blog = ({ }) => {
 
@@ -18,11 +19,16 @@ const Blog = ({ }) => {
              
             // Loop through the data and store
             // it in array to display
+            const items = [];
+
             querySnapshot.forEach(element => {
-                var data = element.data();
-                setArticles(arr => [...arr , data]);
-                  
+                items.push(element.data());
+
+                // setArticles(arr => [...arr , data]);
+                  console.log(element)
             });
+
+            setArticles(items)
         })
                 // const items = [];
                 // ref.forEach((doc) => {
@@ -40,12 +46,13 @@ const Blog = ({ }) => {
             <div className="wrapper">
 
                 {articles.map((article) => (
-                    <a href="" className="blog-card" id={article.id} key={article.id}>
+                    <NavLink to={`single-post/${article}`} className="blog-card" id={article.id} key={article.id}>
                         <div className="img-wrap">
                             <img src={article.imageURL} alt="about us image" />
                         </div>
 
                         <div className="content">
+                            
                             <span className="category">Runway</span>
                             <h4>{article.title}</h4>
                             <p>{article.description}</p>
@@ -56,7 +63,7 @@ const Blog = ({ }) => {
                                 By <span className="author">Veronika Damyanova</span>
                             </div>
                         </div>
-                    </a>
+                    </NavLink>
                 ))}
             </div>
         </section>

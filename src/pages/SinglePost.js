@@ -1,4 +1,6 @@
-const SinglePost = ({ }) => {
+const SinglePost = ({
+    post
+ }) => {
 
 
     return (

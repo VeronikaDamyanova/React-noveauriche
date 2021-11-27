@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { useState } from 'react';
 
 import { BrowserRouter as Router, Routes, Route, Link, NavLink, useParams, BrowserRouter } from 'react-router-dom'
-import { auth } from '../firebase.js'
+import { auth } from '../utils/firebase'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 
 function ListItems({
