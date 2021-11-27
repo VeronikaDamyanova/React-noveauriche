@@ -15,7 +15,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Blog from './components/Blog';
 import { useEffect, useState } from 'react';
-import AuthContext from './contexts/AuthContext';
+import {AuthProvider} from './contexts/AuthContext';
 import isAuth from './hoc/isAuth';
 
 import { getAuth } from "firebase/auth";
@@ -23,19 +23,11 @@ import Create from './components/Create';
 export const auth = getAuth();
 
 function App() {
-  const [user, setUser] = useState(null);
+  
 
-  useEffect(() => {
-    auth.onAuthStateChanged(setUser);
-  }, []);
-
-  const authInfo = {
-    isAuthenticated: Boolean(user),
-    email: user?.email,
-  };
-
+ 
   return (
-    <AuthContext.Provider value={authInfo}>
+    <AuthProvider>
 
     <BrowserRouter>
       <div className="App">
@@ -71,7 +63,7 @@ function App() {
 
       </div>
     </BrowserRouter>
-    </AuthContext.Provider>
+    </AuthProvider>
 
   );
 }

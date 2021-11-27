@@ -7,10 +7,6 @@ import { NavLink } from 'react-router-dom';
 const Blog = ({ }) => {
 
     const [articles, setArticles] = useState([]);
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [imageURL, setimageURL] = useState('');
-
     const ref = getDocs(collection(db, "articles"));
 
     //REALTIME GET FUNCTION
@@ -46,7 +42,7 @@ const Blog = ({ }) => {
             <div className="wrapper">
 
                 {articles.map((article) => (
-                    <NavLink to={`single-post/${article}`} className="blog-card" id={article.id} key={article.id}>
+                    <NavLink to={`single-post/${article.id}`} className="blog-card" id={article.id} key={article.id}>
                         <div className="img-wrap">
                             <img src={article.imageURL} alt="about us image" />
                         </div>
@@ -60,7 +56,7 @@ const Blog = ({ }) => {
                             <hr />
 
                             <div className="authorWrap">
-                                By <span className="author">Veronika Damyanova</span>
+                                By <span className="author">{article.author}</span>
                             </div>
                         </div>
                     </NavLink>
