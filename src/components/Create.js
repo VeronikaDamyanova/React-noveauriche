@@ -14,6 +14,8 @@ function Create () {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [imageURL, setimageURL] = useState('');
+    const [category, setCategory] = useState('');
+
     const [author, setAuthor] = useState('');
 
     const ref = getDocs(collection(db, "articles"));
@@ -46,11 +48,12 @@ function Create () {
     const addArticle = (e) => {
       e.preventDefault()
         const owner = currentUser ? currentUser.uid : 'unknown';
-        const author = currentUser ? currentUser.displayName : 'unknown';
+        const author = currentUser ? currentUser.displayName : currentUser.email;
         const newArticle = {
           title,
           description,
           imageURL,
+          category,
           id: uuidv4(),
           owner,
           author,
@@ -75,7 +78,13 @@ function Create () {
                 <textarea required value={description} placeholder="Description:" onChange={(e) => setDescription(e.target.value)}/>
 
                 <input required type="text" value={imageURL} placeholder="Image URL:" onChange={(e) => setimageURL(e.target.value)}/>
-                
+            
+                {/* <input required type="text" value={category} placeholder="Category:" onChange={(e) => setCategory(e.target.value)}/> */}
+                <select required placeholder="Category:" value={category} onChange={(e) => setCategory(e.target.value)}>
+                  <option selected value="Fashion">Fashion</option>
+                  <option value="Lifestyle">Lifestyle</option>
+                  <option value="Designers">Designers</option>
+                </select>
                 <button>Create</button>
 
               </form>

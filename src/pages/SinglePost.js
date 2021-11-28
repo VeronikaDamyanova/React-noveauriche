@@ -6,18 +6,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const SinglePost = ({}) => {
     const auth = getAuth();
-    var uid;
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-           uid = user.uid;
-          // ...
-        } else {
-          // User is signed out
-          // ...
-        }
-    })
+    const { currentUser, uid } = useContext(AuthContext);
 
     var pathArray = window.location.pathname.split('/');
     var articlePath = pathArray.pop();
@@ -33,7 +22,7 @@ const SinglePost = ({}) => {
         <section className="single-post">
             <div className="wrapper">
                 <div className="main-content">
-                    <span className="category">Raleway</span>
+                    <span className="category">{articleDetails.category}</span>
                     <h2 className="title">{articleDetails.title}</h2>
                     <hr className="top-line"></hr>
                     <div className="author-wrapper">
@@ -46,7 +35,7 @@ const SinglePost = ({}) => {
                     </p>
                 </div>
 
-                {uid === articleDetails.owner
+                {currentUser?.uid === articleDetails.owner
                     ?
                     <div className="owner-content">
 

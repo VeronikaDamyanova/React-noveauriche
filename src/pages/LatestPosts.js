@@ -1,65 +1,47 @@
-import BlogCard from "../components/BlogCard";
+import React, { useState, useEffect, Fragment, useContext } from 'react';
+import { collection, getDocs, query, where, orderBy, limit, onSnapshot } from "firebase/firestore"; 
+import { db } from '../utils/firebase';
+import { NavLink } from 'react-router-dom';
 
-const LatestPosts = ({ }) => {
+const LatestPosts = ({ })  =>  {
 
+    const [articles, setArticles] = useState([]);
+    
+    useEffect(() => {
+        const ref = collection(db, "articles");
+        const q = query(ref, orderBy("lastUpdate", "desc"), limit(3));
+        const unsub = onSnapshot(q, (snapshot) =>
+            setArticles(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        )
+
+        return unsub;
+    }, []);
 
     return (
         <section className="latest-posts">
             <div className="wrapper">
-                <a href="" className="blog-card">
-                    <div className="img-wrap">
-                        <img src="../card-img.avif" alt="about us image" />
-                    </div>
-
-                    <div className="content">
-                        <span className="category">Runway</span>
-                        <h4>What fashion looked like in 1980s</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consectetur nisi illo beatae vel rerum nesciunt est aut eius, obcaecati nam itaque possimus atque. Sapiente vitae sunt nesciunt dolore omnis?</p>
-                        
-                        <hr />
-
-                        <div className="authorWrap">
-                            By <span className="author">Veronika Damyanova</span>
+            {articles.map((article) => (
+                    <NavLink to={`single-post/${article.id}`} className="blog-card" category={article.category} id={article.id} key={article.id}>
+                        <div className="img-wrap">
+                            <img src={article.imageURL} alt="about us image" />
                         </div>
-                    </div>
-                </a>
 
+                        <div className="content">
+                            
+                            <span className="category">{article.category}</span>
+                            <h4>{article.title}</h4>
+                            <p>{article.description}</p>
 
-                <a href="" className="blog-card">
-                    <div className="img-wrap">
-                        <img src="../card-img.avif" alt="about us image" />
-                    </div>
+                            <hr />
 
-                    <div className="content">
-                        <span className="category">Versace</span>
-                        <h4>What fashion looked like in 1980s</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consectetur nisi illo beatae vel rerum nesciunt est aut eius, obcaecati nam itaque possimus atque. Sapiente vitae sunt nesciunt dolore omnis?</p>
-                        
-                        <hr />
-
-                        <div className="authorWrap">
-                            By <span className="author">Veronika Damyanova</span>
+                            <div className="authorWrap">
+                                By <span className="author">{article.author}</span>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </NavLink>
+                ))}
 
-                <a href="" className="blog-card">
-                    <div className="img-wrap">
-                        <img src="../card-img.avif" alt="about us image" />
-                    </div>
-
-                    <div className="content">
-                        <span className="category">Bags</span>
-                        <h4>What fashion looked like in 1980s</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consectetur nisi illo beatae vel rerum nesciunt est aut eius, obcaecati nam itaque possimus atque. Sapiente vitae sunt nesciunt dolore omnis?</p>
-                        
-                        <hr />
-
-                        <div className="authorWrap">
-                            By <span className="author">Veronika Damyanova</span>
-                        </div>
-                    </div>
-                </a>
+            
             </div>
         </section>
 

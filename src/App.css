@@ -375,3 +375,12 @@ footer .footer-container p  {
   font-weight: 500;
   font-size: 18px;
 }
+
+.categories {
+  display: flex;
+  align-items: center;
+}
+
+.categories span {
+  margin-right: 20px;
+}

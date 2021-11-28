@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   const authInfo = {
     isAuthenticated: Boolean(currentUser),
     email: currentUser?.email,
+    uid: currentUser?.uid
   };
 
   return (
