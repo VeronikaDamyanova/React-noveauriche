@@ -46,7 +46,7 @@ function Create () {
     const addArticle = (e) => {
       e.preventDefault()
         const owner = currentUser ? currentUser.uid : 'unknown';
-        const author = currentUser ? currentUser.email : 'unknown';
+        const author = currentUser ? currentUser.displayName : 'unknown';
         const newArticle = {
           title,
           description,
@@ -70,11 +70,11 @@ function Create () {
             <div className="wrapper">
 
               <form className="create-post-form" onSubmit={addArticle}>
-                <input type="text" value={title} placeholder="Title:" onChange={(e) => setTitle(e.target.value)}/>
+                <input required type="text" value={title} placeholder="Title:" onChange={(e) => setTitle(e.target.value)}/>
 
-                <textarea value={description} placeholder="Description:" onChange={(e) => setDescription(e.target.value)}/>
+                <textarea required value={description} placeholder="Description:" onChange={(e) => setDescription(e.target.value)}/>
 
-                <input type="text" value={imageURL} placeholder="Image URL:" onChange={(e) => setimageURL(e.target.value)}/>
+                <input required type="text" value={imageURL} placeholder="Image URL:" onChange={(e) => setimageURL(e.target.value)}/>
                 
                 <button>Create</button>
 

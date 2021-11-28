@@ -2,7 +2,7 @@
 import React, { useState, useEffect, Fragment, useContext } from 'react';
 
 import { collection, addDoc, doc, setDoc } from "firebase/firestore"; 
-import { getAuth, createUserWithEmailAndPassword, signOut  } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut, updateProfile  } from "firebase/auth";
 import { db } from '../../utils/firebase';
 
 export const auth = getAuth();
@@ -28,6 +28,9 @@ const Register = ({
             
 
               setDoc(doc(db, "users", newUser.uid), newUser);
+              updateProfile(auth.currentUser, {
+                displayName: name
+              })
               signOut(auth)
               history.push('/login');
             } catch (err) {

@@ -2,13 +2,23 @@ import React, { useState, useEffect, Fragment, useContext } from 'react';
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../utils/firebase';
 import {AuthContext} from '../contexts/AuthContext';
-import { getAuth } from "firebase/auth";
-export const auth = getAuth();
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const SinglePost = ({}) => {
-    const { isAuthenticated, email } = useContext(AuthContext);
-    const { currentUser } = useContext(AuthContext);
-    // console.log(currentUser)
+    const auth = getAuth();
+    var uid;
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+           uid = user.uid;
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+    })
+
     var pathArray = window.location.pathname.split('/');
     var articlePath = pathArray.pop();
     const [articleDetails, setArticleDetails] = useState('')
@@ -17,12 +27,13 @@ const SinglePost = ({}) => {
         setArticleDetails(doc.data())
 
     });
+    
 
     return (
         <section className="single-post">
             <div className="wrapper">
                 <div className="main-content">
-                    <span className="category">Runway</span>
+                    <span className="category">Raleway</span>
                     <h2 className="title">{articleDetails.title}</h2>
                     <hr className="top-line"></hr>
                     <div className="author-wrapper">
@@ -35,7 +46,7 @@ const SinglePost = ({}) => {
                     </p>
                 </div>
 
-                {currentUser === articleDetails.owner
+                {uid === articleDetails.owner
                     ?
                     <div className="owner-content">
 
