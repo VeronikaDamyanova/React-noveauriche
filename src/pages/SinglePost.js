@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../utils/firebase';
 import {AuthContext} from '../contexts/AuthContext';
@@ -39,7 +40,7 @@ const SinglePost = ({}) => {
                     ?
                     <div className="owner-content">
 
-                        <a href="">Edit Post</a>
+                        <NavLink to={`/edit/${articleDetails.id}`} id={articleDetails.id} key={articleDetails.id}>Edit</NavLink>
                     
                     </div>
                     : <h2>test</h2>

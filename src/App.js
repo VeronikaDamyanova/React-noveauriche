@@ -20,6 +20,7 @@ import isAuth from './hoc/isAuth';
 
 import { getAuth } from "firebase/auth";
 import Create from './components/Create';
+import Edit from './components/Edit';
 export const auth = getAuth();
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/blog" component={Blog} />
           <Route path="/create" component={Create} />
+          <Route path="/edit" component={Edit} />
 
           <Route path="/single-post" component={SinglePost} />
           <Route path="/register" component={Register} />
