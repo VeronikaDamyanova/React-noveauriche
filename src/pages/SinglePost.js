@@ -43,7 +43,7 @@ const SinglePost = ({}) => {
                         <NavLink to={`/edit/${articleDetails.id}`} id={articleDetails.id} key={articleDetails.id}>Edit</NavLink>
                     
                     </div>
-                    : <h2>test</h2>
+                    :''
 
                 }
             </div>

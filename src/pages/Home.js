@@ -7,7 +7,7 @@ const Home = () => {
         <>
 
         <div className="main-image-wrapper">
-            <div className="main-image" style={{ backgroundImage: `url("../home-img.avif")` }}></div>
+            <div className="main-image" style={{ backgroundImage: `url("./images/home-img.avif")` }}></div>
         </div>
         <LatestPosts />
         <About />

@@ -12,7 +12,7 @@ const Header = () => {
         <>
             <header>
                 <nav className="header-container">
-                    <div className="logo-nav"><img src="../logo.png" alt="blabla" /></div>
+                <NavLink to="/" className="logo-nav"><img src="./images/logo.png" alt="blabla" /></NavLink>
                     {/* <ListItems></ListItems> */}
                     <div>
 
@@ -20,11 +20,16 @@ const Header = () => {
                             <li><NavLink to="/">Home</NavLink></li>
                             <li><NavLink to="/about">About</NavLink></li>
 
-                            <li><NavLink to="/blog">Blog</NavLink></li>
                             <li><NavLink to="/designers">Designers</NavLink></li>
                             <li><NavLink to="/profile">Profile</NavLink></li>
                             {currentUser
-                            ? <NavLink to="/logout"><i className="fas fa-sign-out-alt"></i> Logout</NavLink>
+                            ? 
+                            <>
+                                <li><NavLink to="/blog">Blog</NavLink></li>
+                                <li><NavLink to="/create"><i className="fas fa-sign-out-alt"></i>Create</NavLink></li>
+                                <li><NavLink to="/logout"><i className="fas fa-sign-out-alt"></i>Logout</NavLink></li>
+                            </>
+                          
                             : <>
                                 <li><NavLink to="/login">Login</NavLink></li>
                                 <li><NavLink to="/register">Register</NavLink></li>

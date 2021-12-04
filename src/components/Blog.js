@@ -12,70 +12,93 @@ const Blog = ({ }) => {
     //REALTIME GET FUNCTION
     function getArticles() {
     ref.then((querySnapshot) => {
-             
-            // Loop through the data and store
-            // it in array to display
             const items = [];
 
             querySnapshot.forEach(element => {
                 items.push(element.data());
-
-                // setArticles(arr => [...arr , data]);
-                  console.log(element)
+                console.log(element)
             });
 
             setArticles(items)
         })
     }
 
+    function toggleCategories(cat) {
+        var getBlogCards = document.querySelectorAll('.blog-card')
+        getBlogCards.forEach(card => {
+            if(card.getAttribute('category') !== cat && cat !== 'all') {
+                card.classList.toggle('hidden')
+            } else if (cat === 'all') {
+                card.classList.remove('hidden')
+            }
+        })
+       
+
+    }
+
+    
+
+    // async function toggleCategories(cat) {
+    //     if(document.querySelectorAll('.blog-card').getAttribute('category') !== cat) {
+    //         console.log('test')
+    //         console.log(this)
+    //     }
+    //  }
+
+    
+  
+        
+
+
+
     
     useEffect(() => {
         getArticles();
+       
     }, []);
 
-    function toggleCategories(cat) {
-        setCategory('')
-        setCategory(cat)
-        console.log(category)   
-
-    }
+ 
 
         // let getArticleCard = document.getElementsByClassName('blog-card').getAttribute('category')
         // if (getArticleCard !== category) {
         //     this.hide()
         // }
     return (
-        <section className="latest-posts">
+        <section className="blog">
             <div className="wrapper">
                 <div className="categories">
-                    <span >All</span>
-                    <span value="Fashion" onClick={(e) => toggleCategories(e.target.getAttribute("value"))}>Fashion</span>
-                    <span value="Lifestyle" onClick={(e) => toggleCategories(e.target.getAttribute("value"))}>Lifestyle</span>
-                    <span value="Designers" onClick={(e) => toggleCategories(e.target.getAttribute("value"))}>Designers</span>
-
-                  
-
+                    <span className="category" category="all" onClick={(e) => toggleCategories(e.target.getAttribute('category'))}>All</span>
+                    {articles.map((article) => (
+                        article.category 
+                        ? 
+                        <span className="category" category={article.category} onClick={(e) => toggleCategories(article.category)}>{article.category}</span>
+                        : ''
+                    ))}
                 </div>
-                {articles.map((article) => (
-                    <NavLink to={`single-post/${article.id}`} className="blog-card" category={article.category} id={article.id} key={article.id}>
-                        <div className="img-wrap">
-                            <img src={article.imageURL} alt="about us image" />
-                        </div>
 
-                        <div className="content">
-                            
-                            <span className="category">{article.category}</span>
-                            <h4>{article.title}</h4>
-                            <p>{article.description}</p>
-
-                            <hr />
-
-                            <div className="authorWrap">
-                                By <span className="author">{article.author}</span>
+                <div className="blog-posts">
+                    {articles.map((article) => (
+                        <NavLink to={`single-post/${article.id}`} key={article.id} className="blog-card" category={article.category} id={article.id} key={article.id}>
+                            <div className="img-wrap">
+                                <img src={article.imageURL} alt="about us image" />
                             </div>
-                        </div>
-                    </NavLink>
-                ))}
+
+                            <div className="content">
+                                
+                                <span className="category">{article.category}</span>
+                                <h4>{article.title}</h4>
+                                <p>{article.description}</p>
+
+                                <hr />
+
+                                <div className="authorWrap">
+                                    By <span className="author">{article.author}</span>
+                                </div>
+                            </div>
+                        </NavLink>
+                    ))}
+                </div>
+              
             </div>
         </section>
 

@@ -72,6 +72,7 @@ function Create () {
         <section className="create-post">
             <div className="wrapper">
 
+              <div className="boxes">
               <form className="create-post-form" onSubmit={addArticle}>
                 <input required type="text" value={title} placeholder="Title:" onChange={(e) => setTitle(e.target.value)}/>
 
@@ -88,6 +89,14 @@ function Create () {
                 <button>Create</button>
 
               </form>
+
+              <div className="image-box">
+                <img src="./images/balenciaga-bag.jpg"></img>
+              </div>
+
+              </div>
+
+             
             </div>
         </section>
 

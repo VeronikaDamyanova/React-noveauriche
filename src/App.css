@@ -141,6 +141,52 @@ header {
   margin: 0 auto;
 }
 
+/* Blog Page */ 
+
+.blog {
+  width: 100%;
+  padding: 40px 0px;
+}
+
+.blog .wrapper {
+  width: 100%;
+  max-width: 1480px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.blog .wrapper .categories {
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.blog .wrapper .categories span {
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.blog .wrapper .categories span:hover {
+  color: #a60505;
+}
+
+.blog .wrapper .blog-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.blog .wrapper .blog-posts .blog-card {
+  margin-bottom: 30px;
+}
+
 /* Blog Card */
 
 .blog-card {
@@ -150,15 +196,20 @@ header {
   color: #000;
   text-decoration: none;
   transition: 0.5s;
+  margin-right: 30px;
 }
 
 .blog-card:hover {
   color: rgba(0, 0, 0, 0.7);
 }
 
+.blog-card.hidden {
+  display: none;
+}
+
 .blog-card .img-wrap {
   width: 100%;
-  max-height: 250px;
+  height: 250px;
   overflow: hidden;
 }
 
@@ -198,8 +249,10 @@ header {
 
 .blog-card .content hr {
   width: 20%;
+  height: 1px;
   margin: 20px 0px;
-  color: rgb(115, 0, 113);
+  background-color: rgb(115, 0, 113);
+  border: none;
 }
 
 .blog-card .content .author-wrapper {
@@ -270,6 +323,78 @@ header {
   float: right;
   text-decoration: none;
   font-weight: 500;
+}
+
+/* Create Post */
+.create-post {
+  width: 100%;
+  padding: 40px 0px;
+}
+
+.create-post .wrapper {
+  width: 100%;
+  max-width: 1480px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.create-post .wrapper .boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.create-post .wrapper .boxes form {
+  flex: 0 0 45%;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-post .wrapper .boxes form input,
+.create-post .wrapper .boxes form textarea,
+.create-post .wrapper .boxes form select {
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+  padding: 10px 5px;
+  background-color: transparent;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.create-post .wrapper .boxes form select {
+  padding-left: 0;
+  padding-right: 0px;
+}
+
+.create-post .wrapper .boxes form input::placeholder,
+.create-post .wrapper .boxes form textarea::placeholder {
+  color: #000;
+}
+
+.create-post .wrapper .boxes form button {
+  padding: 10px 30px;
+  border: none;
+  background-color: rgb(115, 0, 113); 
+  cursor: pointer;
+  color: #FFF;
+  font-weight: 500;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.create-post .wrapper .boxes form button:hover {
+  background-color: #000000;
+}
+
+.create-post .wrapper .boxes .image-box {
+  flex: 0 0 45%;
+}
+
+.create-post .wrapper .boxes .image-box img {
+  width: 100%;
 }
 
 footer {
@@ -374,13 +499,4 @@ footer .footer-container p  {
   color: #FFF;
   font-weight: 500;
   font-size: 18px;
-}
-
-.categories {
-  display: flex;
-  align-items: center;
-}
-
-.categories span {
-  margin-right: 20px;
 }

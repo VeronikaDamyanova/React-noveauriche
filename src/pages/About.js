@@ -15,7 +15,7 @@ const About = ({ }) => {
                             We at Nouveauriche Fashion are dedicated to sharing the latest trends in fashion and design with the community. Here you can find all the trending brands for clothes, bags, shoes and more (even some gossip). 
                         </p>
                     </div>
-                    <img src="../about-us-img.avif" alt="about us image" />
+                    <img src="./images/about-us-img.avif" alt="about us image" />
 
                 </div>
 

@@ -53,7 +53,9 @@ function Edit () {
    
     return (
         <section className="edit-post">
+         
             <div className="wrapper">
+
 
               <form className="create-post-form" onSubmit={editArticle}>
                 <input required type="text" value={updatedTitle} placeholder={currentDetails.title} onChange={(e) => setUpdatedTitle(e.target.value)}/>
