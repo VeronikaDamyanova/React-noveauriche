@@ -40,7 +40,7 @@ const SinglePost = ({}) => {
                     ?
                     <div className="owner-content">
 
-                        <NavLink to={`/edit/${articleDetails.id}`} id={articleDetails.id} key={articleDetails.id}>Edit</NavLink>
+                        <NavLink to={`/edit/${articleDetails.id}`}>Edit</NavLink>
                     
                     </div>
                     :''

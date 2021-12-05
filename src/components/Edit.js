@@ -1,9 +1,11 @@
 import React, { useState, useEffect, Fragment, useContext } from 'react';
-import { onSnapshot, serverTimestamp, doc, updateDoc, getDoc  } from "firebase/firestore"; 
+import { onSnapshot, serverTimestamp, doc, updateDoc, getDoc, collection  } from "firebase/firestore"; 
 import { db } from '../utils/firebase';
 import {AuthContext} from '../contexts/AuthContext';
 
-function Edit () {
+const Edit = ({
+  history
+}) =>  {
     var pathArray = window.location.pathname.split('/');
     var articlePath = pathArray.pop();
 
@@ -16,35 +18,31 @@ function Edit () {
 
     const articleDoc = doc(db, 'articles', articlePath);
 
-        try {
-            const getData = async () => {
-                const getArticleDoc = await getDoc(articleDoc);
-                const getArticleInfo = getArticleDoc.data();
-                getCurrentDetails(getArticleInfo)
-            }
-            
-        } catch (err) {
-            console.log(err)
-        }
+
+    const thisArticle =  onSnapshot(doc(db, "articles", articlePath), (doc) => {
+      getCurrentDetails(doc.data())
+
+
+  });
     
-    useEffect(() => {
-        
-     
-        
-     
-       
-       
-    }, []);
     const editArticle = (e) => {
         e.preventDefault()
-        const updatedArticle = {
+        updateDoc(articleDoc, {
+      
           title: updatedTitle,
           description: updatedDescription,
           imageURL: updatedImageURL,
           category: updatedCategory,
           lastUpdate: serverTimestamp(),
-        };
-        updateDoc(articleDoc, updatedArticle);      
+        }).then(res => {
+          history.push('/blog');
+
+      })
+      .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+        // updateDoc(articleDoc, updatedArticle);  
     }
         
    
@@ -58,13 +56,13 @@ function Edit () {
 
 
               <form className="create-post-form" onSubmit={editArticle}>
-                <input required type="text" value={updatedTitle} placeholder={currentDetails.title} onChange={(e) => setUpdatedTitle(e.target.value)}/>
+                <input  type="text" value={updatedTitle} placeholder={currentDetails.title} onChange={(e) => setUpdatedTitle(e.target.value)}/>
 
-                <textarea required value={updatedDescription} placeholder={currentDetails.description} onChange={(e) => setUpdatedDescription(e.target.value)}/>
+                <textarea  value={updatedDescription} placeholder={currentDetails.description} onChange={(e) => setUpdatedDescription(e.target.value)}/>
 
-                <input required type="text" value={updatedImageURL} placeholder={currentDetails.imageURL} onChange={(e) => setUpdatedImageURL(e.target.value)}/>
+                <input  type="text" value={updatedImageURL} placeholder={currentDetails.imageURL} onChange={(e) => setUpdatedImageURL(e.target.value)}/>
             
-                <select required placeholder="Category:" value={updatedCategory} onChange={(e) => setUpdatedCategory(e.target.value)}>
+                <select  placeholder="Category:" value={updatedCategory} onChange={(e) => setUpdatedCategory(e.target.value)}>
                   <option value="Fashion">Fashion</option>
                   <option value="Lifestyle">Lifestyle</option>
                   <option value="Designers">Designers</option>

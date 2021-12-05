@@ -2,12 +2,16 @@ import React, { useState, useEffect, Fragment, useContext } from 'react';
 import { collection, getDocs, query, where } from "firebase/firestore"; 
 import { db } from '../utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import { NavLink } from 'react-router-dom';
-
+import { NavLink, Redirect } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 const Blog = ({ }) => {
+    const { currentUser } = useContext(AuthContext);
+
+
     const [articles, setArticles] = useState([]);
     const ref = getDocs(collection(db, "articles"));
     const [category, setCategory] = useState([]);
+ 
 
     //REALTIME GET FUNCTION
     function getArticles() {
@@ -32,25 +36,7 @@ const Blog = ({ }) => {
                 card.classList.remove('hidden')
             }
         })
-       
-
     }
-
-    
-
-    // async function toggleCategories(cat) {
-    //     if(document.querySelectorAll('.blog-card').getAttribute('category') !== cat) {
-    //         console.log('test')
-    //         console.log(this)
-    //     }
-    //  }
-
-    
-  
-        
-
-
-
     
     useEffect(() => {
         getArticles();
@@ -58,11 +44,10 @@ const Blog = ({ }) => {
     }, []);
 
  
-
-        // let getArticleCard = document.getElementsByClassName('blog-card').getAttribute('category')
-        // if (getArticleCard !== category) {
-        //     this.hide()
-        // }
+    // if (!currentUser) {
+    //     return <Redirect to="/login" />
+    // }
+    
     return (
         <section className="blog">
             <div className="wrapper">
@@ -80,7 +65,7 @@ const Blog = ({ }) => {
                     {articles.map((article) => (
                         <NavLink to={`single-post/${article.id}`} key={article.id} className="blog-card" category={article.category} id={article.id} key={article.id}>
                             <div className="img-wrap">
-                                <img src={article.imageURL} alt="about us image" />
+                                <img src={article.imageURL} alt="article image" />
                             </div>
 
                             <div className="content">
