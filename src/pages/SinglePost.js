@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Fragment, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, deleteDoc } from "firebase/firestore";
 import { db } from '../utils/firebase';
 import {AuthContext} from '../contexts/AuthContext';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const SinglePost = ({}) => {
+const SinglePost = ({history}) => {
     const auth = getAuth();
     const { currentUser, uid } = useContext(AuthContext);
 
@@ -17,6 +17,11 @@ const SinglePost = ({}) => {
         setArticleDetails(doc.data())
 
     });
+
+    function deleteArticle() {
+        deleteDoc(doc(db, "articles", articlePath))
+        history.push('/blog');
+    }
     
 
     return (
@@ -39,8 +44,10 @@ const SinglePost = ({}) => {
                 {currentUser?.uid === articleDetails.owner
                     ?
                     <div className="owner-content">
+                        <span className="delete-btn" onClick={deleteArticle}>Delete</span>
 
                         <NavLink to={`/edit/${articleDetails.id}`}>Edit</NavLink>
+
                     
                     </div>
                     :''

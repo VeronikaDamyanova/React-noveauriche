@@ -27,12 +27,17 @@ const Register = ({
               };
             
 
-              setDoc(doc(db, "users", newUser.uid), newUser);
-              updateProfile(auth.currentUser, {
+               updateProfile(auth.currentUser, {
                 displayName: name
               })
-              signOut(auth)
-              history.push('/login');
+
+              await setDoc(doc(db, "users", newUser.uid), newUser).then(()=> {
+                signOut(auth).then(() => {
+                  history.push('/login');
+  
+                })
+
+              })
             } catch (err) {
               console.error(err);
               alert(err.message);

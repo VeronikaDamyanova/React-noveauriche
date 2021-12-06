@@ -47,16 +47,24 @@ const Blog = ({ }) => {
     // if (!currentUser) {
     //     return <Redirect to="/login" />
     // }
+
+    var categoriesArray = []
+    articles.map((article) => {
+        categoriesArray.push(article.category)
+    })
+    let uniqueCategories = categoriesArray.filter((cat, index) => {
+        return categoriesArray.indexOf(cat) === index;
+    });
     
     return (
         <section className="blog">
             <div className="wrapper">
                 <div className="categories">
                     <span className="category" category="all" onClick={(e) => toggleCategories(e.target.getAttribute('category'))}>All</span>
-                    {articles.map((article) => (
-                        article.category 
+                    {uniqueCategories.map((category) => (
+                      category 
                         ? 
-                        <span className="category" category={article.category} onClick={(e) => toggleCategories(article.category)}>{article.category}</span>
+                        <span key={category} className="category" category={category} onClick={(e) => toggleCategories(category)}>{category}</span>
                         : ''
                     ))}
                 </div>

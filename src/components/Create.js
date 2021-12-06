@@ -6,7 +6,7 @@ import {AuthContext} from '../contexts/AuthContext';
 import { getAuth } from "firebase/auth";
 
 
-function Create () {
+const Create = ({history}) => {
   const { currentUser } = useContext(AuthContext);
   const currentUserId = currentUser ? currentUser.uid : null;
 
@@ -61,6 +61,7 @@ function Create () {
           lastUpdate: serverTimestamp(),
         };
          setDoc(doc(db, "articles", newArticle.id), newArticle);
+         history.push('/blog')
         // ref
         //   .doc(newArticle.id)
         //   .set(newArticle)

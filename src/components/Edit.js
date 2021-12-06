@@ -20,10 +20,9 @@ const Edit = ({
 
 
     const thisArticle =  onSnapshot(doc(db, "articles", articlePath), (doc) => {
-      getCurrentDetails(doc.data())
-
-
+      getCurrentDetails(doc.data()) 
   });
+
     
     const editArticle = (e) => {
         e.preventDefault()
@@ -35,14 +34,18 @@ const Edit = ({
           category: updatedCategory,
           lastUpdate: serverTimestamp(),
         }).then(res => {
-          history.push('/blog');
-
+         
       })
+
       .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
         });
+        thisArticle();
+
         // updateDoc(articleDoc, updatedArticle);  
+        history.push('/blog');
+
     }
         
    

@@ -13,34 +13,34 @@ const Header = () => {
             <header>
                 <nav className="header-container">
                 <NavLink to="/" className="logo-nav"><img src="./images/logo.png" alt="blabla" /></NavLink>
-                    {/* <ListItems></ListItems> */}
+                    {/* <divstItems></divstItems> */}
                     <div>
 
-                        <ul className="list-items">
-                            <li><NavLink to="/">Home</NavLink></li>
-                            <li><NavLink to="/about">About</NavLink></li>
+                        <div className="list-items">
+                            <div><NavLink to="/">Home</NavLink></div>
+                            <div><NavLink to="/about">About</NavLink></div>
 
-                            <li><NavLink to="/designers">Designers</NavLink></li>
-                            <li><NavLink to="/profile">Profile</NavLink></li>
+                            <div><NavLink to="/designers">Designers</NavLink></div>
+                            <div><NavLink to="/profile">Profile</NavLink></div>
                             {currentUser
                             ? 
                             <>
-                                <li><NavLink to="/blog">Blog</NavLink></li>
-                                <li><NavLink to="/create"><i className="fas fa-sign-out-alt"></i>Create</NavLink></li>
-                                <li><NavLink to="/logout"><i className="fas fa-sign-out-alt"></i>Logout</NavLink></li>
+                                <div><NavLink to="/blog">Blog</NavLink></div>
+                                <div><NavLink to="/create"><i className="fas fa-sign-out-alt"></i>Create</NavLink></div>
+                                <div><NavLink to="/logout"><i className="fas fa-sign-out-alt"></i>Logout</NavLink></div>
                             </>
                           
                             : <>
-                                <li><NavLink to="/login">Login</NavLink></li>
-                                <li><NavLink to="/register">Register</NavLink></li>
+                                <div><NavLink to="/login">Login</NavLink></div>
+                                <div><NavLink to="/register">Register</NavLink></div>
                             </>
 
                         }
-                        </ul>
+                        </div>
                        
                         {currentUser
-                            ? <li>Welcome, {currentUser.email}!</li>
-                            : <li>Welcome, Guest</li>
+                            ? <div>Welcome, {currentUser.email}!</div>
+                            : <div>Welcome, Guest</div>
                         }
                        
                     </div>

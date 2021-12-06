@@ -57,12 +57,12 @@ header {
   align-items: center;
 }
 
-.list-items li {
+.list-items div {
   margin-right: 25px;
   font-size: 18px;
 }
 
-.list-items li:last-of-type {
+.list-items div:last-of-type {
   margin-right: 0px;
 }
 
@@ -315,14 +315,22 @@ header {
   border-top: 1px solid #000;
 }
 
-.single-post .wrapper .owner-content a {
-  padding: 20px 30px;
+.single-post .wrapper .owner-content a,
+.single-post .wrapper .owner-content span {
+  padding: 20px 60px;
   background-color: rgb(115, 0, 113);
   color: #FFF;
   text-align: center;
   float: right;
   text-decoration: none;
   font-weight: 500;
+  margin-right: 30px;
+}
+
+
+.single-post .wrapper .owner-content span.delete-btn {
+  background-color: #a60505;
+  margin-right: 0px;
 }
 
 /* Create Post */
@@ -424,10 +432,10 @@ footer .footer-container p  {
 
 }
 
-.list-items li a,
-.list-items li a:visited,
-.list-items li a:hover,
-.list-items li a:active{
+.list-items div a,
+.list-items div a:visited,
+.list-items div a:hover,
+.list-items div a:active{
   -webkit-backface-visibility:hidden;
           backface-visibility:hidden;
 	position:relative;
@@ -436,11 +444,11 @@ footer .footer-container p  {
   color: #000;
 }
 
-.list-items li a:hover{
+.list-items div a:hover{
 	color:rgb(115, 0, 113);
 }
 
-.list-items li a:after{
+.list-items div a:after{
   content: "";
   transition:0.5s all ease;
   -webkit-backface-visibility:hidden;
@@ -455,7 +463,7 @@ footer .footer-container p  {
           transform:translateX(-50%);
 }
 
-.list-items li a:hover:after{
+.list-items div a:hover:after{
   width:100%;
 }
 
