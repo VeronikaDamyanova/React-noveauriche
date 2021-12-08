@@ -53,15 +53,18 @@ const Edit = ({
 
    
     return (
-        <section className="edit-post">
+        <section className="create-edit-post">
          
             <div className="wrapper">
 
+              <h2>Edit Post </h2>
+              <h5>Please fill all the fields before submitting!</h5>
 
-              <form className="create-post-form" onSubmit={editArticle}>
+            <div className="boxes">
+              <form className="create-edit-post-form" onSubmit={editArticle}>
                 <input  type="text" value={updatedTitle} placeholder={currentDetails.title} onChange={(e) => setUpdatedTitle(e.target.value)}/>
 
-                <textarea  value={updatedDescription} placeholder={currentDetails.description} onChange={(e) => setUpdatedDescription(e.target.value)}/>
+                <textarea rows="6" value={updatedDescription} placeholder={currentDetails.description} onChange={(e) => setUpdatedDescription(e.target.value)}/>
 
                 <input  type="text" value={updatedImageURL} placeholder={currentDetails.imageURL} onChange={(e) => setUpdatedImageURL(e.target.value)}/>
             
@@ -73,6 +76,14 @@ const Edit = ({
                 <button>Edit</button>
 
               </form>
+
+              <div className="image-box">
+                <img src="../images/balenciaga-bag.jpg"></img>
+              </div>
+              </div>
+
+              
+
             </div>
         </section>
 
