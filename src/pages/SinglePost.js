@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Fragment, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { doc, getDoc, onSnapshot, deleteDoc, getDocs, collection } from "firebase/firestore";
+import { doc, onSnapshot, deleteDoc, collection, where, query, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from '../utils/firebase';
+import { v4 as uuidv4 } from 'uuid';
 import {AuthContext} from '../contexts/AuthContext';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 const SinglePost = ({history}) => {
     const auth = getAuth();
@@ -11,54 +12,53 @@ const SinglePost = ({history}) => {
 
     var pathArray = window.location.pathname.split('/');
     var articlePath = pathArray.pop();
-    const [articleDetails, setArticleDetails] = useState('')
-    const [articleComments, setArticleComments] = useState('')
 
+    const [articleDetails, setArticleDetails] = useState('')
+    const [content, setContent] = useState('');
+    const [getComments, getArticleComments] = useState([])
+    const commentsCollection = collection(db, "comments");
+    
     const thisArticle =  onSnapshot(doc(db, "articles", articlePath), (doc) => {
         setArticleDetails(doc.data())
     });
 
-    // const articleCommentsRef = onSnapshot(doc(db, "articles", articlePath, "comments", "comments"), (doc) => {
-    //     setArticleComments(doc.data())
-    // });
-
-    const articleCommentsRef = getDocs(collection(db, `articles/${articlePath}/comments`));
-    //REALTIME GET FUNCTION
-    function getArticleComments() {
-    articleCommentsRef.then((querySnapshot) => {
-            const items = [];
-
-            querySnapshot.forEach(element => {
-                items.push(element.data());
-                console.log(element)
-            });
-
-            setArticleComments(items)
-        })
-    }
-
-
-    // const postComment = (e) => {
-    //     e.preventDefault();
-    //     doc(db, "articles", articlePath).collection("comments").add({
-    //       comment: comment,
-    //       username: currentUser.displayName,
-    //       commentDate: serverTimestamp(),
-    //     });
-    //     setComment("");
-    //   };
-
+    const addComment = (e) => {
+        e.preventDefault()
+        const owner = currentUser ? currentUser.uid : 'unknown';
+        const author = currentUser ? currentUser.displayName : currentUser.email;
+        const forPost = articlePath;
+        const dateAdded = "Commented on " + new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString();
+        const newComment = {
+          content,
+          id: uuidv4(),
+          owner,
+          author,
+          forPost,
+          dateAdded,
+          createdAt: serverTimestamp()
+        };
+        setDoc(doc(db, "comments", newComment.id), newComment);
+      }
+    
     function deleteArticle() {
         deleteDoc(doc(db, "articles", articlePath))
         history.push('/blog');
     }
 
+    function deleteComment(e) {
+        var getCommentId = e.target.id;
+        deleteDoc(doc(db, "comments", getCommentId))
+    }
+
     useEffect(() => {
-        getArticleComments();
-       
-    }, []);
+        const relatedComments = query(commentsCollection, where("forPost", "==", articlePath));
+        const unsub = onSnapshot(relatedComments, (snapshot) =>
+            getArticleComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        )
+        // return unsub;
     
-    // thisArticle()
+    }, []);
+
     return (
         <section className="single-post">
             <div className="wrapper">
@@ -74,13 +74,32 @@ const SinglePost = ({history}) => {
                 </div>
 
                 <div className="comments">
-                {/* {articleComments[0].map((comment) => (
-                     <p>{comment.comment}</p>
-                    ))}
-                                 */}
-                   <p> {articleComments.dateAdded}</p>
+                    <h3>Comments</h3>
+                    
+                     {getComments.map((comment) => (  
+                        <div key={comment.id} className="comment-box">
+                            <div className="info">
+                                <h5>{comment.author}</h5>
+                                <span>{comment.dateAdded}</span>
+                            </div>
+                        
+                            <p>{comment.content}</p>
 
-                
+                            {currentUser?.uid === comment.owner
+                                ?
+                                    <span className="delete-comment" id={comment.id} onClick={deleteComment}>Delete comment</span>
+                                : ''
+                            }   
+                        </div> 
+                    ))}
+                             
+                    <div className="add-comment-wrapper">
+                        <form className="comment-form" onSubmit={addComment}>
+                            <textarea rows="6" required type="text" value={content} placeholder="Comment:" onChange={(e) => setContent(e.target.value)} />
+
+                            <button>Add comment</button>
+                        </form>
+                    </div>
                 </div>
 
                 {currentUser?.uid === articleDetails.owner
@@ -89,11 +108,8 @@ const SinglePost = ({history}) => {
                         <span className="delete-btn" onClick={deleteArticle}>Delete</span>
 
                         <NavLink to={`/edit/${articleDetails.id}`}>Edit</NavLink>
-
-                    
                     </div>
-                    :''
-
+                    : ''
                 }
             </div>
         </section>
