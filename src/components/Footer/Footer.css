@@ -1,0 +1,25 @@
+footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.6);
+  }
+  
+  footer .footer-container {
+    max-width: 1480px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 20px;
+    margin: 0 auto;
+  
+  }
+  
+  footer .footer-container p  {
+    font-style: italic;
+    color: black;
+  
+  }
+  
+  
+  

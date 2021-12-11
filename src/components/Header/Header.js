@@ -14,11 +14,8 @@ const Header = () => {
                     <div>
 
                         <div className="list-items">
-                            <div><NavLink to="/">Home</NavLink></div>
+                            <div><NavLink exact to="/">Home</NavLink></div>
                             <div><NavLink to="/about">About</NavLink></div>
-
-                            <div><NavLink to="/designers">Designers</NavLink></div>
-                            <div><NavLink to="/profile">Profile</NavLink></div>
                             {currentUser
                             ? 
                             <>
@@ -36,8 +33,8 @@ const Header = () => {
                         </div>
                        
                         {currentUser
-                            ? <div>Welcome, {currentUser.email}!</div>
-                            : <div>Welcome, Guest</div>
+                            ? <div className='welcome-msg'>Welcome, <span>{currentUser.email}</span>!</div>
+                            : <div className='welcome-msg'>Welcome, <span>Guest</span></div>
                         }
                        
                     </div>

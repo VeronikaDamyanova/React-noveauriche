@@ -1,0 +1,89 @@
+header {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1480px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    margin: 0 auto;
+}
+
+.logo-nav {
+    display: flex;
+    max-width: 200px;
+}
+
+.logo-nav img {
+    width: 100%;
+}
+
+.header-container .welcome-msg {
+    margin-top: 10px;
+}
+
+.header-container .welcome-msg span {
+    font-weight: 500;
+}
+
+.list-items {
+    display: flex;
+    align-items: center;
+}
+
+.list-items div {
+    margin-right: 25px;
+    font-size: 18px;
+}
+
+.list-items div:last-of-type {
+    margin-right: 0px;
+}
+
+.list-items div a,
+.list-items div a:visited,
+.list-items div a:hover,
+.list-items div a:active {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    transition: 0.5s color ease;
+    text-decoration: none;
+    color: #000;
+}
+
+.list-items div a.active {
+    color: rgb(115, 0, 113);
+}
+
+.list-items div a.active:after {
+    width: 100%;
+}
+
+.list-items div a:hover {
+    color: rgb(115, 0, 113);
+}
+
+.list-items div a:after {
+    content: "";
+    transition: 0.5s all ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    bottom: -2px;
+    height: 2px;
+    width: 0;
+    background: rgb(115, 0, 113);
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.list-items div a:hover:after {
+    width: 100%;
+}

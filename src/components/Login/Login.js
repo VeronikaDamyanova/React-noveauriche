@@ -1,6 +1,7 @@
 import React from 'react'
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { getAuth } from "firebase/auth";
 export const auth = getAuth();
 const Login = ({
@@ -11,16 +12,29 @@ const Login = ({
 
         const email = e.target.email.value;
         const password = e.target.password.value;
+       
+        if (!email) {
+            toast.warn("Please enter your email !", {
+            })
 
-        signInWithEmailAndPassword(auth, email, password)
+        } else if (!password) {
+            toast.warn("Please enter your password !", {
+            })
+        } 
+
+        if(email, password) {
+            signInWithEmailAndPassword(auth, email, password)
             .then(userCredential => {
+                toast.success("Successfully Logged In!", {
+                    position: toast.POSITION.TOP_CENTER
+                })
                 history.push('/');
-      
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                toast.error(error.code);
             });
+        }
+      
     };
   
   

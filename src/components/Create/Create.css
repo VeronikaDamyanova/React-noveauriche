@@ -1,0 +1,83 @@
+.create-edit-post {
+    width: 100%;
+    padding: 40px 0px;
+}
+
+.create-edit-post .wrapper {
+    width: 100%;
+    max-width: 1480px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.create-edit-post .wrapper h2 {
+    margin-bottom: 20px;
+}
+
+.create-edit-post .wrapper h5 {
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+.create-edit-post .wrapper .boxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.create-edit-post .wrapper .boxes form {
+    flex: 0 0 45%;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.create-edit-post .wrapper .boxes form input,
+.create-edit-post .wrapper .boxes form textarea,
+.create-edit-post .wrapper .boxes form select {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    padding: 10px 5px;
+    background-color: transparent;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.create-edit-post .wrapper .boxes form select {
+    padding-left: 0;
+    padding-right: 0px;
+}
+
+.create-edit-post .wrapper .boxes form input::placeholder,
+.create-edit-post .wrapper .boxes form textarea::placeholder {
+    color: #000;
+}
+
+.create-edit-post .wrapper .boxes form button {
+    padding: 10px 30px;
+    border: none;
+    background-color: rgb(115, 0, 113);
+    cursor: pointer;
+    color: #FFF;
+    font-weight: 500;
+    font-size: 18px;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.create-edit-post .wrapper .boxes form button:hover {
+    background-color: #000000;
+}
+
+.create-edit-post .wrapper .boxes .image-box {
+    flex: 0 0 45%;
+}
+
+.create-edit-post .wrapper .boxes .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

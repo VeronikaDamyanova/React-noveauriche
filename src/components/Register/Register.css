@@ -1,0 +1,42 @@
+.login-register-page {
+    width: 100%;
+    height: calc(100vh - 173px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.93)),
+        url('../../images/loginRegisterBG.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.login-register-page form {
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+}
+
+.login-register-page form h2 {
+    margin-bottom: 40px;
+}
+
+.login-register-page form input {
+    padding: 10px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.login-register-page form button {
+    padding: 10px 30px;
+    border: none;
+    background-color: rgb(115, 0, 113);
+    cursor: pointer;
+    color: #FFF;
+    font-weight: 500;
+    font-size: 18px;
+}

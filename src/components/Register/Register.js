@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-
+import { toast } from 'react-toastify';
 import { doc, setDoc } from "firebase/firestore"; 
 import { getAuth, createUserWithEmailAndPassword, signOut, updateProfile  } from "firebase/auth";
 import { db } from '../../utils/firebase';
@@ -15,37 +15,55 @@ const Register = ({
     const [name, setName] = useState("");
         const registerWithEmailAndPassword = async (name, email, password) => {
             try {
-              const res = await createUserWithEmailAndPassword(auth, email, password); 
+
+              if(name, email, password) {
+                const res = await createUserWithEmailAndPassword(auth, email, password); 
             
-              const user = res.user;
-
-              const newUser = {
-                uid: user.uid,
-                name,
-                email,
-                likedArticles: [],
-              };
-          
-              updateProfile(auth.currentUser, {
-                displayName: name
-              })
-
-              await setDoc(doc(db, "users", newUser.uid), newUser).then(()=> {
-                signOut(auth).then(() => {
-                  history.push('/login');
+                const user = res.user;
   
+                const newUser = {
+                  uid: user.uid,
+                  name,
+                  email,
+                  likedArticles: [],
+                };
+            
+                updateProfile(auth.currentUser, {
+                  displayName: name
                 })
-              })
-            } catch (err) {
-              console.error(err);
-              alert(err.message);
+  
+                await setDoc(doc(db, "users", newUser.uid), newUser).then(()=> {
+                  toast.success("Successful Registration!", {
+                    position: toast.POSITION.TOP_CENTER
+                  })
+                  signOut(auth).then(() => {
+                    history.push('/login');
+    
+                  })
+                })
+              }
+              
+            } catch (error) {
+              toast.error(error.code);
             }
           };
 
           const register = (e) => {            
             e.preventDefault()
 
-            if (!name) alert("Please enter name");
+            if (!name) {
+              toast.warn("Please enter your name !", {
+
+              })
+            } else if (!email) {
+              toast.warn("Please enter your email !", {
+
+              })
+            } else if (!password) {
+              toast.warn("Please enter your password !", {
+
+              })
+            } 
             registerWithEmailAndPassword(name, email, password);
           };
 

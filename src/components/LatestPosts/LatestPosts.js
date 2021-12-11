@@ -18,6 +18,7 @@ const LatestPosts = ({ })  =>  {
     }, []);
 
     return (
+        <>
         <section className="latest-posts">
             <div className="wrapper">
                 {articles.map((article) => (
@@ -42,6 +43,25 @@ const LatestPosts = ({ })  =>  {
                 ))}
             </div>
         </section>
+
+        {/* Add ="true" to jsx to remove html error */}
+        <style jsx="true">{`
+            .latest-posts {
+                width: 100%;
+                padding: 40px 0px;
+            }
+            .latest-posts .wrapper {
+                width: 100%;
+                max-width: 1480px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                padding: 20px;
+                margin: 0 auto;
+            }
+
+        `}</style>
+        </>
     )
 }
 

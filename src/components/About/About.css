@@ -1,0 +1,37 @@
+.about-us {
+  width: 100%;
+  padding: 40px 0px;
+}
+
+.about-us .wrapper {
+  width: 100%;
+  max-width: 1480px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  margin: 0 auto;
+}
+
+.about-us .wrapper .top-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.about-us .wrapper .top-content .content {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-us .wrapper .top-content .content h2 {
+  margin-bottom: 25px;
+}
+
+.about-us .wrapper .top-content .content p {}
+
+.about-us .wrapper .top-content img {
+  width: 48%;
+}
