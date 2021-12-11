@@ -1,14 +1,12 @@
-import React, { useState, useEffect, Fragment, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { collection, getDocs, serverTimestamp, doc, setDoc } from "firebase/firestore";
-import { db } from '../utils/firebase';
+import { db } from '../../utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import { AuthContext } from '../contexts/AuthContext';
-import { getAuth } from "firebase/auth";
+import { AuthContext } from '../../contexts/AuthContext';
 
 
 const Create = ({ history }) => {
   const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser ? currentUser.uid : null;
 
   const [articles, setArticles] = useState([]);
   const [title, setTitle] = useState('');
@@ -16,32 +14,22 @@ const Create = ({ history }) => {
   const [imageURL, setimageURL] = useState('');
   const [category, setCategory] = useState('');
 
-  const [author, setAuthor] = useState('');
-
   const ref = getDocs(collection(db, "articles"));
 
-  //REALTIME GET FUNCTION
-  function getArticles() {
+ function getArticles() {
     ref.then((querySnapshot) => {
 
-      // Loop through the data and store
-      // it in array to display
+      // Loop through the data and store it in array to display
       querySnapshot.forEach(element => {
         var data = element.data();
         setArticles(arr => [...arr, data]);
 
       });
     })
-    // const items = [];
-    // ref.forEach((doc) => {
-    //     items.push(doc.data());
-    // });
-    // setArticles(items);
-
   }
+
   useEffect(() => {
     getArticles();
-    // eslint-disable-next-line
   }, []);
 
 
@@ -62,13 +50,8 @@ const Create = ({ history }) => {
     };
     setDoc(doc(db, "articles", newArticle.id), newArticle);
     history.push('/blog')
-    // ref
-    //   .doc(newArticle.id)
-    //   .set(newArticle)
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
   }
+
   return (
     <section className="create-edit-post">
       <div className="wrapper">

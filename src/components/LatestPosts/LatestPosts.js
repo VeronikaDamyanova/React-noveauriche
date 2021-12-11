@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Fragment, useContext } from 'react';
-import { collection, getDocs, query, where, orderBy, limit, onSnapshot } from "firebase/firestore"; 
-import { db } from '../utils/firebase';
+import React, { useState, useEffect } from 'react';
+import { collection, query, orderBy, limit, onSnapshot } from "firebase/firestore"; 
+import { db } from '../../utils/firebase';
 import { NavLink } from 'react-router-dom';
 
 const LatestPosts = ({ })  =>  {
@@ -20,7 +20,7 @@ const LatestPosts = ({ })  =>  {
     return (
         <section className="latest-posts">
             <div className="wrapper">
-            {articles.map((article) => (
+                {articles.map((article) => (
                     <NavLink to={`single-post/${article.id}`} className="blog-card" category={article.category} id={article.id} key={article.id}>
                         <div className="img-wrap">
                             <img src={article.imageURL} alt="about us image" />
@@ -40,14 +40,8 @@ const LatestPosts = ({ })  =>  {
                         </div>
                     </NavLink>
                 ))}
-
-            
             </div>
         </section>
-
-
-
-
     )
 }
 

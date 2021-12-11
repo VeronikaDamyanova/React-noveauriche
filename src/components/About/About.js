@@ -1,5 +1,3 @@
-import ListItems from "../components/ListItems";
-
 const About = ({ }) => {
 
 

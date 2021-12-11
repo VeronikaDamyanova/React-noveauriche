@@ -1,7 +1,6 @@
-import React, { useState, useEffect, Fragment, useContext } from 'react';
-import { onSnapshot, serverTimestamp, doc, updateDoc, getDoc, collection  } from "firebase/firestore"; 
-import { db } from '../utils/firebase';
-import {AuthContext} from '../contexts/AuthContext';
+import React, { useState} from 'react';
+import { onSnapshot, serverTimestamp, doc, updateDoc } from "firebase/firestore"; 
+import { db } from '../../utils/firebase';
 
 const Edit = ({
   history

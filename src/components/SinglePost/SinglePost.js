@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { doc, onSnapshot, deleteDoc, collection, where, query, serverTimestamp, setDoc } from "firebase/firestore";
-import { db } from '../utils/firebase';
+import { db } from '../../utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import {AuthContext} from '../contexts/AuthContext';
+import {AuthContext} from '../../contexts/AuthContext';
 import { getAuth } from "firebase/auth";
 
 const SinglePost = ({history}) => {
@@ -114,7 +114,6 @@ const SinglePost = ({history}) => {
             </div>
         </section>
 
-        
     )
 }
 

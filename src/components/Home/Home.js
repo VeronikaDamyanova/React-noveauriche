@@ -1,6 +1,6 @@
 import React from 'react'
-import LatestPosts from './LatestPosts';
-import About from './About';
+import LatestPosts from '../LatestPosts/LatestPosts';
+import About from '../About/About';
 
 const Home = () => {
     return (

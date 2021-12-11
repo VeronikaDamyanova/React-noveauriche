@@ -1,19 +1,16 @@
-import ListItems from './ListItems';
 import { NavLink } from 'react-router-dom'
-import { useEffect, useContext } from 'react';
-import {AuthContext} from '../contexts/AuthContext';
+import { useContext } from 'react';
+import {AuthContext} from '../../contexts/AuthContext';
 import { getAuth } from "firebase/auth";
 export const auth = getAuth();
 const Header = () => {
-    const { isAuthenticated, email } = useContext(AuthContext);
     const { currentUser } = useContext(AuthContext);
 
     return (
         <>
             <header>
                 <nav className="header-container">
-                <NavLink to="/" className="logo-nav"><img src="./images/logo.png" alt="blabla" /></NavLink>
-                    {/* <divstItems></divstItems> */}
+                <NavLink to="/" className="logo-nav"><img src="./images/logo.png" alt="logo" /></NavLink>
                     <div>
 
                         <div className="list-items">

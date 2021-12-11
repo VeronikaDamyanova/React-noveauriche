@@ -1,19 +1,15 @@
-import React, { useState, useEffect, Fragment, useContext } from 'react';
-import { collection, getDocs, query, where } from "firebase/firestore"; 
-import { db } from '../utils/firebase';
-import { v4 as uuidv4 } from 'uuid';
-import { NavLink, Redirect } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
+import React, { useState, useEffect, useContext } from 'react';
+import { collection, getDocs} from "firebase/firestore"; 
+import { db } from '../../utils/firebase';
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 const Blog = ({ }) => {
-    const { currentUser } = useContext(AuthContext);
-
 
     const [articles, setArticles] = useState([]);
     const ref = getDocs(collection(db, "articles"));
-    const [category, setCategory] = useState([]);
  
 
-    //REALTIME GET FUNCTION
+    //Get articles in real time
     function getArticles() {
     ref.then((querySnapshot) => {
             const items = [];
