@@ -26,81 +26,28 @@ const Edit = ({
     
     const editArticle = (e) => {
         e.preventDefault()
-        if (updatedTitle !== currentDetails.title && updatedTitle !== '') {
+       
+
+      
           updateDoc(articleDoc, {
+      
             title: updatedTitle,
-            lastUpdate: serverTimestamp(),
-          }).then(() => {
-            toast.success("Your article is updated!", {
-              position: toast.POSITION.TOP_CENTER
-            })  
-            history.push('/blog');
-    
-          }).catch ((error) => {
-            toast.error(error.code);
-          })
-        } else if (updatedDescription !== currentDetails.description && updatedDescription !== '') {
-          updateDoc(articleDoc, {
             description: updatedDescription,
-            lastUpdate: serverTimestamp(),
-          }).then(() => {
-            toast.success("Your article is updated!", {
-              position: toast.POSITION.TOP_CENTER
-            })  
-            history.push('/blog');
-    
-          }).catch ((error) => {
-            toast.error(error.code);
-          })
-        } else if (updatedImageURL !== currentDetails.imageURL && updatedImageURL !== '') {
-          updateDoc(articleDoc, {
             imageURL: updatedImageURL,
-            lastUpdate: serverTimestamp(),
-          }).then(() => {
-            toast.success("Your article is updated!", {
-              position: toast.POSITION.TOP_CENTER
-            })   
-            history.push('/blog');
-   
-          }).catch ((error) => {
-            toast.error(error.code);
-          })
-        }
-        else if (updatedCategory !== currentDetails.category && updatedCategory !== '') {
-          updateDoc(articleDoc, {
             category: updatedCategory,
             lastUpdate: serverTimestamp(),
           }).then(() => {
-            toast.success("Your article is updated!", {
+            toast.success("Your article is published!", {
               position: toast.POSITION.TOP_CENTER
-            })      
-            history.push('/blog');
+            })
+      
 
           }).catch ((error) => {
             toast.error(error.code);
           })
-        }
-         else if (updatedTitle == '' && updatedDescription == '' && updatedImageURL == '' && updatedCategory == '') {
-          toast.warn('You need to update atleast one of the fields.')
-        }
-
-        // updateDoc(articleDoc, {
-      
-        //   title: updatedTitle,
-        //   description: updatedDescription,
-        //   imageURL: updatedImageURL,
-        //   category: updatedCategory,
-        //   lastUpdate: serverTimestamp(),
-        // }).then(() => {
-        //   toast.success("Your article is published!", {
-        //     position: toast.POSITION.TOP_CENTER
-        //   })
-        //   history.push('/blog')
-    
-        // }).catch ((error) => {
-        //   toast.error(error.code);
-        // })
-        thisArticle();
+        
+          history.push('/blog')
+          thisArticle();
 
         // updateDoc(articleDoc, updatedArticle);  
 
@@ -120,13 +67,14 @@ const Edit = ({
 
             <div className="boxes">
               <form className="create-edit-post-form" onSubmit={editArticle}>
-                <input type="text" value={updatedTitle} placeholder={currentDetails.title} name='title' onChange={(e) => setUpdatedTitle(e.target.value)}/>
+                <input required type="text" value={updatedTitle} placeholder={currentDetails.title} name='title' onChange={(e) => setUpdatedTitle(e.target.value)}/>
 
-                <textarea rows="6" value={updatedDescription} placeholder={currentDetails.description} name='description' onChange={(e) => setUpdatedDescription(e.target.value)}/>
+                <textarea required rows="6" value={updatedDescription} placeholder={currentDetails.description} name='description' onChange={(e) => setUpdatedDescription(e.target.value)}/>
 
-                <input  type="text" value={updatedImageURL} placeholder={currentDetails.imageURL} name='imageURL' onChange={(e) => setUpdatedImageURL(e.target.value)}/>
+                <input required type="text" value={updatedImageURL} placeholder={currentDetails.imageURL} name='imageURL' onChange={(e) => setUpdatedImageURL(e.target.value)}/>
             
-                <select placeholder={currentDetails.category} value={updatedCategory} onChange={(e) => setUpdatedCategory(e.target.value)}>
+                <select required value={updatedCategory} onChange={(e) => setUpdatedCategory(e.target.value)}>
+                  <option disabled></option>
                   <option value="Fashion">Fashion</option>
                   <option value="Lifestyle">Lifestyle</option>
                   <option value="Designers">Designers</option>

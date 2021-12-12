@@ -44,22 +44,29 @@
     background-color: transparent;
     font-size: 16px;
     margin-bottom: 25px;
+    color: #FFF;
 }
 
 .create-edit-post .wrapper .boxes form select {
     padding-left: 0;
     padding-right: 0px;
+    cursor: pointer;
+}
+
+.create-edit-post .wrapper .boxes form select option{
+    color: #000;
+
 }
 
 .create-edit-post .wrapper .boxes form input::placeholder,
 .create-edit-post .wrapper .boxes form textarea::placeholder {
-    color: #000;
+    color: #FFF;
 }
 
 .create-edit-post .wrapper .boxes form button {
     padding: 10px 30px;
     border: none;
-    background-color: rgb(115, 0, 113);
+    background-color: rgb(255, 135, 183);
     cursor: pointer;
     color: #FFF;
     font-weight: 500;
@@ -69,7 +76,8 @@
 }
 
 .create-edit-post .wrapper .boxes form button:hover {
-    background-color: #000000;
+    background-color: #FFF;
+    color: #000;
 }
 
 .create-edit-post .wrapper .boxes .image-box {

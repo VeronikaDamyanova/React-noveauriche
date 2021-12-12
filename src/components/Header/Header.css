@@ -1,6 +1,6 @@
 header {
     width: 100%;
-    background-color: #fff;
+    background-color: rgb(255, 135, 183);
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
 }
 
@@ -54,11 +54,11 @@ header {
     position: relative;
     transition: 0.5s color ease;
     text-decoration: none;
-    color: #000;
+    color: #FFF;
 }
 
 .list-items div a.active {
-    color: rgb(115, 0, 113);
+    color: #000;
 }
 
 .list-items div a.active:after {
@@ -66,7 +66,7 @@ header {
 }
 
 .list-items div a:hover {
-    color: rgb(115, 0, 113);
+    color: #000;
 }
 
 .list-items div a:after {
@@ -78,7 +78,7 @@ header {
     bottom: -2px;
     height: 2px;
     width: 0;
-    background: rgb(115, 0, 113);
+    background: #000;
     left: 50%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);

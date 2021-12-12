@@ -23,10 +23,13 @@ const SinglePost = ({history}) => {
         setArticleDetails(doc.data())
     });
 
+
     const addComment = (e) => {
         e.preventDefault()
         const owner = currentUser ? currentUser.uid : 'unknown';
         const author = currentUser ? currentUser.displayName : currentUser.email;
+        const authorEmail = currentUser ? currentUser.email : '';
+
         const forPost = articlePath;
         const dateAdded = "Commented on " + new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString();
         const newComment = {
@@ -34,6 +37,7 @@ const SinglePost = ({history}) => {
           id: uuidv4(),
           owner,
           author,
+          authorEmail,
           forPost,
           dateAdded,
           createdAt: serverTimestamp()
@@ -41,20 +45,13 @@ const SinglePost = ({history}) => {
         setDoc(doc(db, "comments", newComment.id), newComment).then(() => {
             document.getElementById('commentTextarea').innerHTML = "";
             document.getElementById('commentTextarea').value = "";
-            toast.success("Your comment is added!", {
-                position: toast.POSITION.TOP_CENTER
-            })
-
+            setContent('')
         }).catch((error) => {
-            toast.success(error.code)
+            toast.error(error.code)
         })
     }
 
-    function deleteComment(e) {
-        var getCommentId = e.target.id;
-        deleteDoc(doc(db, "comments", getCommentId))
-    }
-    
+
     function deleteArticle() {
         deleteDoc(doc(db, "articles", articlePath)).then(() => {
             toast.success("The article has been deleted!")
@@ -64,15 +61,23 @@ const SinglePost = ({history}) => {
         })
     }
 
+    function deleteComment(e) {
+        var getCommentId = e.target.id;
+        e.target.parentNode.style.display = 'none';
+        deleteDoc(doc(db, "comments", getCommentId))
+    }
+    
+
     useEffect(() => {
-        const relatedComments = query(commentsCollection,  orderBy("createdAt", "desc"), where("forPost", "==", articlePath));
-        const unsub = onSnapshot(relatedComments, (snapshot) =>
+        const relatedCommentsFilter = query(commentsCollection,  orderBy("createdAt", "desc"), where("forPost", "==", articlePath));
+        const relatedComments = onSnapshot(relatedCommentsFilter, (snapshot) =>
             getArticleComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         )
-        // return unsub;
+        // return relatedComments;
     
     }, []);
 
+  
     return (
         <section className="single-post">
             <div className="wrapper">
@@ -93,7 +98,7 @@ const SinglePost = ({history}) => {
                      {getComments.map((comment) => (  
                         <div key={comment.id} className="comment-box">
                             <div className="info">
-                                <h5>{comment.author}</h5>
+                                <h5>{comment.author ? comment.author : comment.authorEmail}</h5>
                                 <span>{comment.dateAdded}</span>
                             </div>
                         

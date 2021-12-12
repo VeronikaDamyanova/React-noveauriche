@@ -6,12 +6,12 @@ import { AuthContext } from '../../contexts/AuthContext';
 const Blog = ({ }) => {
 
     const [articles, setArticles] = useState([]);
-    const ref = getDocs(collection(db, "articles"));
+    const articleDocs = getDocs(collection(db, "articles"));
  
 
     //Get articles in real time
     function getArticles() {
-    ref.then((querySnapshot) => {
+        articleDocs.then((querySnapshot) => {
             const items = [];
 
             querySnapshot.forEach(element => {

@@ -19,7 +19,7 @@
 }
 
 .single-post .wrapper .main-content .category {
-    color: #a60505;
+    color: rgb(255, 135, 183);
     margin-bottom: 15px;
 }
 
@@ -29,7 +29,7 @@
 
 .single-post .wrapper .main-content hr.top-line {
     width: 100px;
-    color: #a60505;
+    color: rgb(255, 135, 183);
     margin-bottom: 40px;
 }
 
@@ -54,7 +54,7 @@
 .single-post .wrapper .owner-content a,
 .single-post .wrapper .owner-content span {
     padding: 20px 60px;
-    background-color: rgb(115, 0, 113);
+    background-color: rgb(255, 135, 183);
     color: #FFF;
     text-align: center;
     float: right;
@@ -68,6 +68,7 @@
 .single-post .wrapper .owner-content span.delete-btn {
     background-color: #a60505;
     margin-right: 0px;
+    color: #FFF;
 }
 
 
@@ -91,6 +92,7 @@
     border-bottom-right-radius: 0px;
     background-color: #fff;
     margin-bottom: 20px;
+    color: #000;
 }
 
 .comments .comment-box .info {
@@ -156,6 +158,7 @@
     font-size: 16px;
     border-radius: 4px;
     margin-bottom: 25px;
+    color: #FFF;
 }
 
 .add-comment-wrapper .comment-form button {
@@ -163,7 +166,7 @@
     align-self: flex-end;
     width: fit-content;
     padding: 20px 40px;
-    background-color: rgb(115, 0, 113);
+    background-color: rgb(255, 135, 183);
     color: #FFF;
     text-align: center;
     float: right;

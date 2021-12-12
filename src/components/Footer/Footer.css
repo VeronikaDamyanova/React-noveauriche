@@ -2,7 +2,7 @@ footer {
     width: 100%;
     display: flex;
     align-items: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
   }
   
   footer .footer-container {
@@ -17,7 +17,7 @@ footer {
   
   footer .footer-container p  {
     font-style: italic;
-    color: black;
+    color: #FFF;
   
   }
   
