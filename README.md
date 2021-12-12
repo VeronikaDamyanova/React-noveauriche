@@ -1,5 +1,4 @@
-https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white
-
+ ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) ![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) ![](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 # React Project
  
 ReactJS final exam project for ReactJS Course in Software University. The project is a fashion blog, where users can create their own account, posts/articles, comments, as well as edit and delete them. The project uses Firebase email/password authentication as well as the Firestore database where users, posts/articles and comments are stored
