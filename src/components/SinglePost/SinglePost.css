@@ -23,6 +23,12 @@
     margin-bottom: 15px;
 }
 
+.single-post .wrapper .main-content .dateAdded {
+    opacity: 0.8;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
 .single-post .wrapper .main-content .title {
     margin-bottom: 40px;
 }

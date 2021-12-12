@@ -83,6 +83,7 @@ const SinglePost = ({history}) => {
             <div className="wrapper">
                 <div className="main-content">
                     <span className="category">{articleDetails.category}</span>
+                    <span className="dateAdded">Published <i>{articleDetails.dateAdded}</i></span>
                     <h2 className="title">{articleDetails.title}</h2>
                     <hr className="top-line"></hr>
                     <div className="author-wrapper">

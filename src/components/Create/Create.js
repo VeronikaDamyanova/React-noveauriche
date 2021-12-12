@@ -39,12 +39,14 @@ const Create = ({ history }) => {
 
     const owner = currentUser ? currentUser.uid : 'unknown';
     const author = currentUser ? currentUser.displayName : currentUser.email;
+    const dateAdded = new Date().toLocaleDateString();
     const authorEmail = currentUser.email
     const newArticle = {
       title,
       description,
       imageURL,
       category,
+      dateAdded,
       id: uuidv4(),
       owner,
       author,
