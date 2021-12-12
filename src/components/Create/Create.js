@@ -3,7 +3,7 @@ import { collection, getDocs, serverTimestamp, doc, setDoc } from "firebase/fire
 import { db } from '../../utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthContext } from '../../contexts/AuthContext';
-
+import { toast } from 'react-toastify';
 
 const Create = ({ history }) => {
   const { currentUser } = useContext(AuthContext);
@@ -34,9 +34,12 @@ const Create = ({ history }) => {
 
 
   const addArticle = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+   
+
     const owner = currentUser ? currentUser.uid : 'unknown';
     const author = currentUser ? currentUser.displayName : currentUser.email;
+    const authorEmail = currentUser.email
     const newArticle = {
       title,
       description,
@@ -45,11 +48,19 @@ const Create = ({ history }) => {
       id: uuidv4(),
       owner,
       author,
+      authorEmail,
       createdAt: serverTimestamp(),
       lastUpdate: serverTimestamp(),
     };
-    setDoc(doc(db, "articles", newArticle.id), newArticle);
-    history.push('/blog')
+    setDoc(doc(db, "articles", newArticle.id), newArticle).then(() => {
+      toast.success("Your article is published!", {
+        position: toast.POSITION.TOP_CENTER
+      })
+      history.push('/blog')
+
+    }).catch ((error) => {
+      toast.error(error.code);
+    })
   }
 
   return (
@@ -67,6 +78,7 @@ const Create = ({ history }) => {
             <input required type="text" value={imageURL} placeholder="Image URL:" onChange={(e) => setimageURL(e.target.value)} />
 
             <select required placeholder="Category:" value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option disabled></option>
               <option value="Fashion">Fashion</option>
               <option value="Lifestyle">Lifestyle</option>
               <option value="Designers">Designers</option>

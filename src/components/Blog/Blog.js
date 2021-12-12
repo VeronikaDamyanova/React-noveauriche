@@ -16,7 +16,6 @@ const Blog = ({ }) => {
 
             querySnapshot.forEach(element => {
                 items.push(element.data());
-                console.log(element)
             });
 
             setArticles(items)
@@ -81,7 +80,7 @@ const Blog = ({ }) => {
                                 <hr />
 
                                 <div className="authorWrap">
-                                    By <span className="author">{article.author}</span>
+                                    By <span className="author">{article.author ? article.author : article.authorEmail}</span>
                                 </div>
                             </div>
                         </NavLink>

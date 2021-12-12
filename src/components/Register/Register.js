@@ -25,7 +25,6 @@ const Register = ({
                   uid: user.uid,
                   name,
                   email,
-                  likedArticles: [],
                 };
             
                 updateProfile(auth.currentUser, {

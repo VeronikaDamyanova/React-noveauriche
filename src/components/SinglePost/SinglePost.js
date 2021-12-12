@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { doc, onSnapshot, deleteDoc, collection, where, query, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, onSnapshot, deleteDoc, collection, where, query, serverTimestamp, setDoc, orderBy } from "firebase/firestore";
 import { db } from '../../utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import {AuthContext} from '../../contexts/AuthContext';
 import { getAuth } from "firebase/auth";
+import { toast } from 'react-toastify';
 
 const SinglePost = ({history}) => {
     const auth = getAuth();
@@ -37,21 +38,34 @@ const SinglePost = ({history}) => {
           dateAdded,
           createdAt: serverTimestamp()
         };
-        setDoc(doc(db, "comments", newComment.id), newComment);
-      }
-    
-    function deleteArticle() {
-        deleteDoc(doc(db, "articles", articlePath))
-        history.push('/blog');
+        setDoc(doc(db, "comments", newComment.id), newComment).then(() => {
+            document.getElementById('commentTextarea').innerHTML = "";
+            document.getElementById('commentTextarea').value = "";
+            toast.success("Your comment is added!", {
+                position: toast.POSITION.TOP_CENTER
+            })
+
+        }).catch((error) => {
+            toast.success(error.code)
+        })
     }
 
     function deleteComment(e) {
         var getCommentId = e.target.id;
         deleteDoc(doc(db, "comments", getCommentId))
     }
+    
+    function deleteArticle() {
+        deleteDoc(doc(db, "articles", articlePath)).then(() => {
+            toast.success("The article has been deleted!")
+            history.push('/blog');
+        }).catch((error) => {
+            toast.error(error.code)
+        })
+    }
 
     useEffect(() => {
-        const relatedComments = query(commentsCollection, where("forPost", "==", articlePath));
+        const relatedComments = query(commentsCollection,  orderBy("createdAt", "desc"), where("forPost", "==", articlePath));
         const unsub = onSnapshot(relatedComments, (snapshot) =>
             getArticleComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         )
@@ -67,10 +81,10 @@ const SinglePost = ({history}) => {
                     <h2 className="title">{articleDetails.title}</h2>
                     <hr className="top-line"></hr>
                     <div className="author-wrapper">
-                        By <span className="author">{articleDetails.author}</span>
+                        By <span className="author">{articleDetails.author ? articleDetails.author : articleDetails.authorEmail}</span>
                     </div>
                     <img className="post-image" src={articleDetails.imageURL} />
-                    
+                    <p className='description'>{articleDetails.description}</p>
                 </div>
 
                 <div className="comments">
@@ -95,7 +109,7 @@ const SinglePost = ({history}) => {
                              
                     <div className="add-comment-wrapper">
                         <form className="comment-form" onSubmit={addComment}>
-                            <textarea rows="6" required type="text" value={content} placeholder="Comment:" onChange={(e) => setContent(e.target.value)} />
+                            <textarea id='commentTextarea' rows="6" required type="text" value={content} placeholder="Comment:" onChange={(e) => setContent(e.target.value)} />
 
                             <button>Add comment</button>
                         </form>
