@@ -12,11 +12,11 @@ const Blog = () => {
 
     //Get articles in real time
     function getArticles() {
-        articleDocs.then((querySnapshot) => {
+        articleDocs.then((doc) => {
             const items = [];
 
-            querySnapshot.forEach(element => {
-                items.push(element.data());
+            doc.forEach(docInfo => {
+                items.push(docInfo.data());
             });
 
             setArticles(items)
