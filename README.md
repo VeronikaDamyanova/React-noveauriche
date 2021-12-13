@@ -1,7 +1,7 @@
  ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) ![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) ![](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 # React Project
  
-ReactJS final exam project for ReactJS Course in Software University. The project is a fashion blog, where users can create their own account, posts/articles, comments, as well as edit and delete them. The project uses Firebase email/password authentication as well as the Firestore database where users, posts/articles and comments are stored
+ReactJS final exam project for ReactJS Course in Software University. The project is a fashion blog, where users can create their own account, posts/articles, comments, as well as edit and delete them. The project uses Firebase email/password authentication as well as the Firestore database where users, posts/articles and comments are stored.
 
 ## Features
 - Public and Private part.
@@ -10,6 +10,7 @@ ReactJS final exam project for ReactJS Course in Software University. The projec
 - View a single blog post where they can view other people's comments, add and delete their own comments.
 - Create their own blog posts.
 - Edit and delete their own posts.
+- Visit a page containing their own posts.
 
 ## How to Install
 - Clone the repository
@@ -17,7 +18,6 @@ ReactJS final exam project for ReactJS Course in Software University. The projec
 - After the process is finished, run command npm start.
 
 ## How to Use
-
 The Project consists of Public and Private part.
 
 ### Public part
@@ -27,7 +27,6 @@ The Project consists of Public and Private part.
 - After logging in the user can access the Private part of the website.
 
 ### Private part
-- In the Private part authenticated users can view the latests posts section in the Homepage
 - Users have access to Blog page where they can view all the posts or choose from a specific category.
 - Clicking on a post/article will redirect the user to the Single post/article page.
 - In the Single post/article page, users can view all the information about the post, see other users' comments, add their own comment and delete it.
@@ -36,6 +35,7 @@ The Project consists of Public and Private part.
 - This post private area consists of Edit and Delete buttons.
 - Clicking on Edit button will redirect the user to a form. Currently all the info about the post is shown as a placeholder in the input fields. 
 - In order to edit their posts, users currently need to fill all the input fields and then submit in order to edit.
+- Users have access to My Posts page where they can view all the posts/articles they have created.
 
 ## Future Modifications/Fixes
 This is a list of the things I would like to add/fix to the project in the future.
