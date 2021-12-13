@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { collection, getDocs} from "firebase/firestore"; 
 import { db } from '../../utils/firebase';
 import { NavLink } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
-const Blog = ({ }) => {
+
+import './Blog.css';
+
+const Blog = () => {
 
     const [articles, setArticles] = useState([]);
     const articleDocs = getDocs(collection(db, "articles"));
- 
 
     //Get articles in real time
     function getArticles() {
@@ -22,6 +23,7 @@ const Blog = ({ }) => {
         })
     }
 
+    //Category toggle function
     function toggleCategories(cat) {
         var getBlogCards = document.querySelectorAll('.blog-card')
         getBlogCards.forEach(card => {
@@ -38,15 +40,15 @@ const Blog = ({ }) => {
        
     }, []);
 
- 
-    // if (!currentUser) {
-    //     return <Redirect to="/login" />
-    // }
-
+    
     var categoriesArray = []
+
+    //Get the categories from all posts from the state (article) and add them to the empty array
     articles.map((article) => {
         categoriesArray.push(article.category)
     })
+
+    //Filter through the array and get only the unique categories (no duplicates)
     let uniqueCategories = categoriesArray.filter((cat, index) => {
         return categoriesArray.indexOf(cat) === index;
     });
@@ -66,9 +68,9 @@ const Blog = ({ }) => {
 
                 <div className="blog-posts">
                     {articles.map((article) => (
-                        <NavLink to={`single-post/${article.id}`} key={article.id} className="blog-card" category={article.category} id={article.id} key={article.id}>
+                        <NavLink to={`single-post/${article.id}`} className="blog-card" category={article.category} id={article.id} key={article.id}>
                             <div className="img-wrap">
-                                <img src={article.imageURL} alt="article image" />
+                                <img src={article.imageURL} alt="article" />
                             </div>
 
                             <div className="content">

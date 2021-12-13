@@ -29,10 +29,5 @@ h4 {
   font-size: 24px;
 }
 
-@import url('../src/components/Header/Header.css');
-@import url('../src/components/About/About.css');
-@import url('../src/components/Blog/Blog.css');
-@import url('../src/components//SinglePost/SinglePost.css');
-@import url('../src/components/Create/Create.css');
-@import url('../src/components/Register/Register.css');
-@import url('../src/components/Footer/Footer.css');
+/* @import url('../src/components/Header/Header.css'); */
+/* @import url('../src/components/About/About.css'); */

@@ -16,7 +16,7 @@ import Login from './components/Login/Login';
 import Blog from './components/Blog/Blog';
 import Create from './components/Create/Create';
 import Edit from './components/Edit/Edit';
-
+import MyPosts from './components/MyPosts/MyPosts';
 export const auth = getAuth();
 
 function App() { 
@@ -31,6 +31,7 @@ function App() {
         <Route exact path="/" component={Home } />
         <Route path="/about" component={About} />
         <Route path="/blog" component={Blog} />
+        <Route path="/my-posts" component={MyPosts} />
         <Route path="/create" component={Create} />
         <Route path="/edit" component={Edit} />
         <Route path="/single-post" component={SinglePost} />

@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom'
 import { useContext } from 'react';
 import {AuthContext} from '../../contexts/AuthContext';
 import { getAuth } from "firebase/auth";
+
+import './Header.css';
 export const auth = getAuth();
 const Header = () => {
     const { currentUser } = useContext(AuthContext);
@@ -20,6 +22,7 @@ const Header = () => {
                             ? 
                             <>
                                 <div><NavLink to="/blog">Blog</NavLink></div>
+                                <div><NavLink to="/my-posts">My Posts</NavLink></div>
                                 <div><NavLink to="/create"><i className="fas fa-sign-out-alt"></i>Create</NavLink></div>
                                 <div><NavLink to="/logout"><i className="fas fa-sign-out-alt"></i>Logout</NavLink></div>
                             </>

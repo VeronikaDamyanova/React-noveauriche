@@ -22,7 +22,7 @@ const Login = ({
             })
         } 
 
-        if(email, password) {
+        if(email && password) {
             signInWithEmailAndPassword(auth, email, password)
             .then(userCredential => {
                 toast.success("Successfully Logged In!", {

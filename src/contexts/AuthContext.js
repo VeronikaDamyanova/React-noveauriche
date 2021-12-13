@@ -1,6 +1,5 @@
 
-import React, { useEffect, useState, Navigate, } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 const auth = getAuth();
 
@@ -13,6 +12,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
         setCurrentUser(user);
+        user
+        ? localStorage.setItem('currentUserUID', user.uid)
+        : localStorage.removeItem('currentUserUID')
     });
   }, []);
 

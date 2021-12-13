@@ -5,10 +5,10 @@ import {AuthContext} from '../contexts/AuthContext';
 const isAuth = (WrappedComponent) => {
 
     const Component = (props) => {
-        const { isAuthenticated } = useContext(AuthContext);
+        const { currentUser } = useContext(AuthContext);
         const history = useHistory();
 
-        if (!isAuthenticated) {
+        if (!currentUser) {
             history.push('/login')
 
             return null;

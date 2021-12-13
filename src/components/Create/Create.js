@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 
+import './Create.css';
+
 const Create = ({ history }) => {
   const { currentUser } = useContext(AuthContext);
 
@@ -19,7 +21,7 @@ const Create = ({ history }) => {
  function getArticles() {
     ref.then((querySnapshot) => {
 
-      // Loop through the data and store it in array to display
+      // Loop through the data and add it to the setState
       querySnapshot.forEach(element => {
         var data = element.data();
         setArticles(arr => [...arr, data]);
@@ -36,7 +38,6 @@ const Create = ({ history }) => {
   const addArticle = (e) => {
     e.preventDefault();
    
-
     const owner = currentUser ? currentUser.uid : 'unknown';
     const author = currentUser ? currentUser.displayName : currentUser.email;
     const dateAdded = new Date().toLocaleDateString();
@@ -54,6 +55,8 @@ const Create = ({ history }) => {
       createdAt: serverTimestamp(),
       lastUpdate: serverTimestamp(),
     };
+
+    //Create new article/post
     setDoc(doc(db, "articles", newArticle.id), newArticle).then(() => {
       toast.success("Your article is published!", {
         position: toast.POSITION.TOP_CENTER
@@ -90,7 +93,7 @@ const Create = ({ history }) => {
           </form>
 
           <div className="image-box">
-            <img src="./images/balenciaga-bag.jpg"></img>
+            <img src="./images/balenciaga-bag.jpg" alt='create'></img>
           </div>
 
         </div>

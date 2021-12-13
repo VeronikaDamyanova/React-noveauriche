@@ -4,25 +4,24 @@ import { doc, onSnapshot, deleteDoc, collection, where, query, serverTimestamp, 
 import { db } from '../../utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import {AuthContext} from '../../contexts/AuthContext';
-import { getAuth } from "firebase/auth";
 import { toast } from 'react-toastify';
 
+import './SinglePost.css';
+
 const SinglePost = ({history}) => {
-    const auth = getAuth();
-    const { currentUser, uid } = useContext(AuthContext);   
+    const { currentUser } = useContext(AuthContext);   
 
     var pathArray = window.location.pathname.split('/');
-    var articlePath = pathArray.pop();
+    var articlePathID = pathArray.pop();
 
     const [articleDetails, setArticleDetails] = useState('')
     const [content, setContent] = useState('');
     const [getComments, getArticleComments] = useState([])
     const commentsCollection = collection(db, "comments");
     
-    const thisArticle =  onSnapshot(doc(db, "articles", articlePath), (doc) => {
+    const thisArticle =  onSnapshot(doc(db, "articles", articlePathID), (doc) => {
         setArticleDetails(doc.data())
     });
-
 
     const addComment = (e) => {
         e.preventDefault()
@@ -30,7 +29,7 @@ const SinglePost = ({history}) => {
         const author = currentUser ? currentUser.displayName : currentUser.email;
         const authorEmail = currentUser ? currentUser.email : '';
 
-        const forPost = articlePath;
+        const forPost = articlePathID;
         const dateAdded = "Commented on " + new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString();
         const newComment = {
           content,
@@ -42,6 +41,8 @@ const SinglePost = ({history}) => {
           dateAdded,
           createdAt: serverTimestamp()
         };
+
+        //Add the comment to the database and reset the field, value and state
         setDoc(doc(db, "comments", newComment.id), newComment).then(() => {
             document.getElementById('commentTextarea').innerHTML = "";
             document.getElementById('commentTextarea').value = "";
@@ -53,7 +54,7 @@ const SinglePost = ({history}) => {
 
 
     function deleteArticle() {
-        deleteDoc(doc(db, "articles", articlePath)).then(() => {
+        deleteDoc(doc(db, "articles", articlePathID)).then(() => {
             toast.success("The article has been deleted!")
             history.push('/blog');
         }).catch((error) => {
@@ -69,7 +70,10 @@ const SinglePost = ({history}) => {
     
 
     useEffect(() => {
-        const relatedCommentsFilter = query(commentsCollection,  orderBy("createdAt", "desc"), where("forPost", "==", articlePath));
+        //get only the comments from the collection that are for the specific post/article id and order them by creation date
+        const relatedCommentsFilter = query(commentsCollection,  orderBy("createdAt", "desc"), where("forPost", "==", articlePathID));
+
+        //Get comments and updates in realtime
         const relatedComments = onSnapshot(relatedCommentsFilter, (snapshot) =>
             getArticleComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         )
@@ -89,7 +93,7 @@ const SinglePost = ({history}) => {
                     <div className="author-wrapper">
                         By <span className="author">{articleDetails.author ? articleDetails.author : articleDetails.authorEmail}</span>
                     </div>
-                    <img className="post-image" src={articleDetails.imageURL} />
+                    <img className="post-image" src={articleDetails.imageURL} alt='post'/>
                     <p className='description'>{articleDetails.description}</p>
                 </div>
 

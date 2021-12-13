@@ -5,6 +5,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signOut, updateProfile  } from "firebase/auth";
 import { db } from '../../utils/firebase';
 
+import './Register.css';
+
 export const auth = getAuth();
 
 const Register = ({
@@ -16,7 +18,8 @@ const Register = ({
         const registerWithEmailAndPassword = async (name, email, password) => {
             try {
 
-              if(name, email, password) {
+              if(name && email && password) {
+                //Create user in firebase auth
                 const res = await createUserWithEmailAndPassword(auth, email, password); 
             
                 const user = res.user;
@@ -27,10 +30,11 @@ const Register = ({
                   email,
                 };
             
-                updateProfile(auth.currentUser, {
+                await updateProfile(auth.currentUser, {
                   displayName: name
                 })
   
+                //Add the new user in firestore collection
                 await setDoc(doc(db, "users", newUser.uid), newUser).then(()=> {
                   toast.success("Successful Registration!", {
                     position: toast.POSITION.TOP_CENTER
