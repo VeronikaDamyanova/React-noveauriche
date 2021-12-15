@@ -15,7 +15,8 @@ const About = () => {
 
                 </div>
 
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus magni inventore cupiditate obcaecati consequatur consectetur blanditiis quae, iusto sit facere voluptate in reiciendis quidem. Consequatur, aliquam laborum. Aperiam, quam rem?Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt impedit accusamus velit rem, quos dignissimos iste ea facere itaque quisquam iusto sequi suscipit. Ipsam itaque voluptate velit, rerum iste est?</p>
+                <p className='quote'>"What you wear is how you present yourself to the world, especially today, when human contacts are so quick. Fashion is instant language." —Miuccia Prada</p>
+               
             </div>
         </section>
     )

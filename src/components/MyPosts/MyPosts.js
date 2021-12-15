@@ -11,7 +11,7 @@ const MyPosts = ()  =>  {
         const owner = localStorage.getItem('currentUserUID')        ;
         const myArticlesFilter = query(articlesCollection, where("owner", "==", owner));
 
-        //Get comments and updates in realtime
+        //Get all the articles that match the query filter above
         const myArticles = onSnapshot(myArticlesFilter, (snapshot) =>
             getArticles(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         )

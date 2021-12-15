@@ -21,7 +21,7 @@ const Create = ({ history }) => {
  function getArticles() {
     ref.then((querySnapshot) => {
 
-      // Loop through the data and add it to the setState
+      // Loop through the data and add it to the useState
       querySnapshot.forEach(element => {
         var data = element.data();
         setArticles(arr => [...arr, data]);

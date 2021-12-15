@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .about-us .wrapper .top-content .content {
@@ -32,10 +32,17 @@
   margin-bottom: 25px;
 }
 
-.about-us .wrapper .top-content .content p {}
+.about-us .wrapper .top-content .content p {
+  font-weight: 400;
+}
 
 .about-us .wrapper .top-content img {
   width: 50%;
   max-height: 800px;
   object-fit: cover;
+}
+
+.about-us .wrapper .quote {
+  font-weight: 500;
+  margin-bottom: 15px;
 }

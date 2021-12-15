@@ -55,8 +55,9 @@ const SinglePost = ({history}) => {
 
     function deleteArticle() {
         deleteDoc(doc(db, "articles", articlePathID)).then(() => {
-            toast.success("The article has been deleted!")
             history.push('/blog');
+
+            toast.success("The article has been deleted!")
         }).catch((error) => {
             toast.error(error.code)
         })
@@ -86,7 +87,7 @@ const SinglePost = ({history}) => {
         <section className="single-post">
             <div className="wrapper">
                 <div className="main-content">
-                    <span className="category">{articleDetails.category}</span>
+                    <span className="category">{articleDetails?.category}</span>
                     <span className="dateAdded">Published <i>{articleDetails.dateAdded}</i></span>
                     <h2 className="title">{articleDetails.title}</h2>
                     <hr className="top-line"></hr>
