@@ -24,13 +24,28 @@ const Blog = () => {
     }
 
     //Category toggle function
-    function toggleCategories(cat) {
+    function toggleCategories(cat, elem) {
         var getBlogCards = document.querySelectorAll('.blog-card')
+        var categoryElem = document.querySelectorAll('.blog .wrapper .categories span')
+        console.log(categoryElem)
         getBlogCards.forEach(card => {
+            card.classList.remove('hidden')
+                   
             if(card.getAttribute('category') !== cat && cat !== 'all') {
-                card.classList.toggle('hidden')
+                card.classList.add('hidden')
+                categoryElem.forEach(el => {                    
+                    el.classList.remove('active')
+                })
+                
+                elem.classList.toggle('active')
+                
             } else if (cat === 'all') {
                 card.classList.remove('hidden')
+             
+                categoryElem.forEach(el => {                    
+                    el.classList.remove('active')
+                })
+                elem.classList.toggle('active')
             }
         })
     }
@@ -57,11 +72,11 @@ const Blog = () => {
         <section className="blog">
             <div className="wrapper">
                 <div className="categories">
-                    <span className="category" category="all" onClick={(e) => toggleCategories(e.target.getAttribute('category'))}>All</span>
+                    <span className="category active" category="all" onClick={(e) => toggleCategories(e.target.getAttribute('category'), e.target)}>All</span>
                     {uniqueCategories.map((category) => (
                       category 
                         ? 
-                        <span key={category} className="category" category={category} onClick={(e) => toggleCategories(category)}>{category}</span>
+                        <span key={category} className="category" category={category} onClick={(e) => toggleCategories(category, e.target)}>{category}</span>
                         : ''
                     ))}
                 </div>

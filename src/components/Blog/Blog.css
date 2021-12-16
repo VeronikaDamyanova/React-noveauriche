@@ -28,6 +28,10 @@
     transition: 0.3s;
 }
 
+.blog .wrapper .categories span.active {
+    color: rgb(255, 135, 183);
+}
+
 .blog .wrapper .categories span:hover {
     color: rgb(255, 135, 183);
 }
@@ -35,7 +39,6 @@
 .blog .wrapper .blog-posts {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .blog .wrapper .blog-posts .blog-card {

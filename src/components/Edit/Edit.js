@@ -34,7 +34,7 @@ const Edit = ({
       category: updatedCategory,
       lastUpdate: serverTimestamp(),
     }).then(() => {
-      toast.success("Your article is published!", {
+      toast.success("Your article is updated!", {
         position: toast.POSITION.TOP_CENTER
       })
 
