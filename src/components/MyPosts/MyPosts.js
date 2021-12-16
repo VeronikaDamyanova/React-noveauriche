@@ -21,26 +21,35 @@ const MyPosts = ()  =>  {
         <>
         <section className="latest-posts my-posts">
             <div className="wrapper">  
-                {articles.map((article) => (
-                    <NavLink to={`single-post/${article.id}`} className="blog-card blog-card-mypost" category={article.category} id={article.id} key={article.id}>
-                        <div className="img-wrap">
-                            <img src={article.imageURL} alt="about us" />
-                        </div>
-
-                        <div className="content">
-                            
-                            <span className="category">{article.category}</span>
-                            <h4>{article.title}</h4>
-                            <p>{article.description}</p>
-
-                            <hr />
-
-                            <div className="authorWrap">
-                                By <span className="author">{article.author}</span>
+                {articles.length > 0 ?  
+                
+                <>
+                   {articles.map((article) => (
+                        <NavLink to={`single-post/${article.id}`} className="blog-card blog-card-mypost" category={article.category} id={article.id} key={article.id}>
+                            <div className="img-wrap">
+                                <img src={article.imageURL} alt="about us" />
                             </div>
-                        </div>
-                    </NavLink>
-                ))}
+
+                            <div className="content">
+                                
+                                <span className="category">{article.category}</span>
+                                <h4>{article.title}</h4>
+                                <p>{article.description}</p>
+
+                                <hr />
+
+                                <div className="authorWrap">
+                                    By <span className="author">{article.author}</span>
+                                </div>
+                            </div>
+                        </NavLink>
+                    ))}
+                </>
+             
+            
+                
+
+                : <h3 style={{margin: "0 auto"}}>You have not created any posts.</h3>}
             </div>
         </section>
 
